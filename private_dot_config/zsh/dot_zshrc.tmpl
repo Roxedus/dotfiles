@@ -1,4 +1,6 @@
+{{ if ne .chezmoi.hostname "code-server" }}
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+{{- end }}
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh.json)"
 
 export EDITOR=nano
