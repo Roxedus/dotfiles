@@ -44,6 +44,9 @@ blocks:
         style: powerline
         template: " \uFD03 {{ .User.Name | replace \".onmicrosoft\" \"\" }}{{ if not .IsDefault }}#{{ .Name }}{{ end }}"
         type: az
+        properties:
+          include_folders:
+            - .*az.*
       - background: "#844FBA"
         foreground: "#ffffff"
         powerline_symbol: "\uE0B0"
@@ -55,6 +58,10 @@ blocks:
         style: powerline
         template: " {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}}"
         type: kubectl
+        properties:
+          include_folders:
+            - .*kube.*
+            - .*argo.*
       - background: "#b6131b"
         foreground: "#ffffff"
         powerline_symbol: "\uE0B0"
