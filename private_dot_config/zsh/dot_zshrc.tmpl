@@ -1,3 +1,4 @@
+{{ if ne .chezmoi.os "windows" }}
 {{ if ne .chezmoi.hostname "code-server" }}
 eval "$({{ if eq .chezmoi.os "linux" }}/home/linuxbrew/.linuxbrew{{ else if eq .chezmoi.os "darwin" -}}/opt/homebrew{{ end }}/bin/brew shellenv)"
 {{- end }}
@@ -87,3 +88,4 @@ if [ -t 0 ]; then
         . ~/.bash_aliases
     fi
 fi
+{{ end }}
