@@ -5,6 +5,7 @@ AppData/
 {{- end }}
 {{- if eq .chezmoi.os "windows" }}
 .config/zsh
+.zshenv
 .bashrc
 .bash_aliases
 {{- end }}
