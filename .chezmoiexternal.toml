@@ -17,6 +17,29 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
+{{ if .manage_bin -}}
+{{ if .integrations.oh_my_posh -}}
+{{ $ompVersion := nospace (cat "v" .bin.oh_my_posh) -}}
+{{- if eq .bin.oh_my_posh "latest" }}
+{{ $ompVersion = (gitHubLatestRelease "JanDeDobbeleer/oh-my-posh").TagName -}}
+{{ end }}
+[".local/bin/oh-my-posh"]
+    type = "file"
+    executable = true
+    url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/{{ $ompVersion }}/posh-{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
+{{ end }}
+{{ if .integrations.bitwarden -}}
+[".local/bin"]
+    type = "archive"
+    executable = true
+    include = ["bw"]
+{{ if eq .chezmoi.os "darwin" -}}
+    url = "https://github.com/bitwarden/clients/releases/download/cli-v{{ .bin.bitwarden }}/bw-macos-{{ .bin.bitwarden }}.zip"
+{{ else -}}
+    url = "https://github.com/bitwarden/clients/releases/download/cli-v{{ .bin.bitwarden }}/bw-{{ .chezmoi.os -}}-{{ .bin.bitwarden }}.zip"
+{{ end }}
+{{ end }}
+{{ end }}
 {{ if eq .chezmoi.os "darwin" -}}
 [".config/iterm2.sh"]
     type = "file"

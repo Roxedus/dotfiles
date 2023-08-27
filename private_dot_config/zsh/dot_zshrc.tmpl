@@ -66,22 +66,28 @@ if [ -t 0 ]; then
     export PATH="$PATH:$HOME/.local/bin"
 
     {{ template "wsl_env.tmpl" . }}
+
     fpath=($HOME/.zsh/completion $fpath)
 
-    autoload -U +X bashcompinit && bashcompinit
-    autoload -Uz compinit && compinit
+    #    autoload -U +X bashcompinit && bashcompinit
+    #    autoload -Uz compinit && compinit
 
-    (( $+commands[argocd] )) && source <(argocd completion zsh)
-    (( $+commands[bat] )) && alias cat=bat
-    (( $+commands[bw] )) && eval "$(bw completion --shell zsh); compdef _bw bw;"
-    (( $+commands[chezmoi] )) && source <(chezmoi completion zsh)
-    (( $+commands[helm] )) && source <(helm completion zsh)
-    (( $+commands[kubecolor] )) && source <(kubectl completion zsh)
-    (( $+commands[kubecolor] )) && alias kubectl=kubecolor
-    (( $+commands[kubecolor] )) && compdef kubecolor=kubectl
+    (( $+_comps[argocd] )) && source <(argocd completion zsh)
+    (( $+_comps[chezmoi] )) && source <(chezmoi completion zsh)
+    (( $+_comps[helm] )) && source <(helm completion zsh)
+
+    (( $+commands[bat] )) && alias cat=bat && alias rcat=/bin/cat
+
+    {{ if .integrations.bitwarden -}}
+    (( $+_comps[bw] )) && eval "$(bw completion --shell zsh); compdef _bw bw;"
+    alias bwopen='export BW_SESSION=$(bw unlock --raw)'
+    {{- end }}
 
     if [ -f ~/.bash_aliases ]; then
         . ~/.bash_aliases
     fi
+fi
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+    eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh.yaml)"
 fi
 {{ end }}

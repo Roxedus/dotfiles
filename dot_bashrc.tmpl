@@ -122,6 +122,7 @@ fi
 {{ end }}
 
 export EDITOR=nano
+export PATH="$PATH:$HOME/.local/bin"
 
 {{ template "wsl_env.tmpl" . }}
 

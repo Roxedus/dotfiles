@@ -1,0 +1,35 @@
+{{- if lookPath "brew" -}}
+#!/bin/bash
+
+brew bundle --no-lock --file=/dev/stdin <<EOF
+brew "gcc"
+brew "age"
+brew "argocd"
+brew "azure-cli"
+brew "bat"
+brew "bpython"
+brew "chroma"
+brew "flux"
+brew "git"
+brew "helm"
+brew "jq"
+brew "k9s"
+brew "pygments"
+brew "sops"
+brew "syft"
+brew "terraform"
+brew "terragrunt"
+brew "yq"
+tap "azure/bicep"
+{{ if eq .chezmoi.os "darwin" -}}
+brew "git"
+brew "htop"
+brew "openssh"
+brew "sudo-touchid"
+cask "font-fira-code"
+cask "git-credential-manager-core"
+cask "powershell"
+cask "vagrant"
+{{ end -}}
+EOF
+{{ end -}}

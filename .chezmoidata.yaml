@@ -1,0 +1,8 @@
+manage_bin: true
+bin:
+  bitwarden: 2023.5.0
+  oh_my_posh: 17.9.0
+
+integrations:
+  bitwarden: true
+  oh_my_posh: true
