@@ -71,8 +71,9 @@ if [ -t 0 ]; then
     autoload -Uz compinit && compinit
 
     (( $+commands[argocd] )) && source <(argocd completion zsh)
-    (( $+commands[chezmoi] )) && source <(chezmoi completion zsh)
+    (( $+commands[bat] )) && alias cat=bat
     (( $+commands[bw] )) && eval "$(bw completion --shell zsh); compdef _bw bw;"
+    (( $+commands[chezmoi] )) && source <(chezmoi completion zsh)
 
     if [ -f ~/.bash_aliases ]; then
         . ~/.bash_aliases
