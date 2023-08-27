@@ -6,7 +6,7 @@ alias infra="cd /mnt/e/Gitea/Infra/ansible && aenv"
 {{ end -}}
 {{ end -}}
 
-alias tester="docker run --rm -it --name=test --tmpfs /config:rw -e TZ=${TZ} -e PUID=$(id -u) -e PGID=$(id -g)"
+alias tester="docker run --rm -t --name=test --tmpfs /config:exec -e TZ=${TZ} -e PUID=$(id -u) -e PGID=$(id -g)"
 alias texec="docker exec -it test /bin/bash"
 alias dive="docker run --rm -it --name=dive -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest"
 alias sudo="sudo "

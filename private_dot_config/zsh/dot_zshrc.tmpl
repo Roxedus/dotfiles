@@ -1,5 +1,5 @@
 {{ if ne .chezmoi.os "windows" }}
-{{ if ne .chezmoi.hostname "code-server" }}
+{{ if ( or (ne .chezmoi.hostname "code-server") (ne .chezmoi.hostname "vscode-server")) }}
 eval "$({{ if eq .chezmoi.os "linux" }}/home/linuxbrew/.linuxbrew{{ else if eq .chezmoi.os "darwin" -}}/opt/homebrew{{ end }}/bin/brew shellenv)"
 {{- end }}
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh.yaml)"
@@ -31,7 +31,7 @@ plugins=(
     {{ if eq .chezmoi.os "darwin" -}}
     iterm2
     {{ end }}
-    {{ if ne .chezmoi.hostname "code-server" -}}
+    {{ if ( or (ne .chezmoi.hostname "code-server") (ne .chezmoi.hostname "vscode-server")) -}}
     gpg-agent
     vscode
     {{ end -}}
@@ -52,7 +52,7 @@ if [ -t 0 ]; then
 
     {{ if eq .chezmoi.os "linux" -}}
     export GPG_TTY=$(tty)
-    {{ if ne .chezmoi.hostname "code-server" -}}
+    {{ if ( or (ne .chezmoi.hostname "code-server") (ne .chezmoi.hostname "vscode-server")) -}}
     VSCODE=code-insiders
     {{ end -}}
     {{ end -}}
@@ -83,6 +83,7 @@ if [ -t 0 ]; then
     (( $+commands[bat] )) && alias cat=bat
     (( $+commands[bw] )) && eval "$(bw completion --shell zsh); compdef _bw bw;"
     (( $+commands[chezmoi] )) && source <(chezmoi completion zsh)
+    (( $+commands[helm] )) && source <(helm completion zsh)
     (( $+commands[kubecolor] )) && source <(kubectl completion zsh)
     (( $+commands[kubecolor] )) && alias kubectl=kubecolor
     (( $+commands[kubecolor] )) && compdef kubecolor=kubectl
