@@ -1,0 +1,3 @@
+{{ if eq .chezmoi.os "windows" }}
+{{- template "powershell_posh.tmpl" . -}}
+{{ end }}
