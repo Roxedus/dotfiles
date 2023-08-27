@@ -42,7 +42,7 @@ blocks:
         foreground: "#323130"
         powerline_symbol: "\uE0B0"
         style: powerline
-        template: " \uFD03 {{ .User.Name }}{{ if not .IsDefault }}@{{ .Name }}{{ end }}"
+        template: " \uFD03 {{ .User.Name | replace \".onmicrosoft\" \"\" }}{{ if not .IsDefault }}#{{ .Name }}{{ end }}"
         type: az
       - background: "#844FBA"
         foreground: "#ffffff"
