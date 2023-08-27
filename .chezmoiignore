@@ -1,6 +1,7 @@
 .vscode/
 .encrypted_vars/
 {{- if ne .chezmoi.os "windows" }}
+run_*.ps1
 .config/powershell/Microsoft.PowerShell_profile.ps1
 Documents/
 AppData/
@@ -10,6 +11,7 @@ AppData/
 .zshenv
 .bashrc
 .bash_aliases
+run_*.sh
 {{- end }}
 {{- if eq .chezmoi.os "linux" }}
 {{- if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
