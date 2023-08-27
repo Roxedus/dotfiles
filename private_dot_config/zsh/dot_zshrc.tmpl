@@ -44,8 +44,6 @@ if [ -t 0 ]; then
 
     source $ZSH/oh-my-zsh.sh
 
-    eval "$(bw completion --shell zsh); compdef _bw bw;"
-
     alias zshconfig="${EDITOR} $ZDOTDIR/.zshrc"
     alias ohmyzsh="${EDITOR} $ZSH"
 
@@ -65,6 +63,7 @@ if [ -t 0 ]; then
 
     (( $+commands[argocd] )) && source <(argocd completion zsh)
     (( $+commands[chezmoi] )) && source <(chezmoi completion zsh)
+    (( $+commands[bw] )) && eval "$(bw completion --shell zsh); compdef _bw bw;"
 
     if [ -f ~/.bash_aliases ]; then
         . ~/.bash_aliases
