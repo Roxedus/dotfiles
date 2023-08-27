@@ -3,10 +3,13 @@
 #!/bin/bash
 
 {{ template "hishtory_env.tmpl" . -}}
-{{ if .integration.bitwarden.enabled }}
-hishtory init {{ (bitwardenFields "item" "dotfiles").hishtory_user_secret.value }}
-{{ else }}
-hishtory init --offline
-{{ end -}}
+
+{{- $hishSecret := "--offline" -}}
+{{- if .integration.bitwarden.enabled -}}
+{{- $hishSecret = (bitwardenFields "item" "dotfiles").hishtory_user_secret.value -}}
+{{- else if not .integration.hishtory.offline -}}
+{{- $hishSecret = joinPath .chezmoi.sourceDir "/.encrypted_vars/hishtory.age" | include | decrypt -}}
+{{- end }}
+hishtory init {{ $hishSecret | trim }}
 {{ end -}}
 {{ end }}

@@ -1,4 +1,4 @@
-{{ if .integration.bitwarden.enabled -}}
+{{ if not .integration.hishtory.offline -}}
 export HISHTORY_SERVER={{ .integration.hishtory.settings.server }}
 {{ end -}}
 export HISHTORY_PATH=".config/hishtory"
