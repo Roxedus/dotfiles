@@ -1,12 +1,9 @@
 {{- if eq .chezmoi.os "linux" }}
 {{- if (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
-#!/bin/sh
-
-sudo tee /etc/wsl.conf <<EOF
-echo [automount]
+[automount]
 enabled = true
 root = /mnt/
-options = "metadata,uid=1000,gid=1000,umask=22,fmask=11,metadata"
+options = "metadata,uid=1000,gid=1000,umask=022,fmask=11"
 mountFsTab = true
 
 [network]
@@ -16,7 +13,5 @@ generateResolvConf = true
 [interop]
 enabled = true
 appendWindowsPath = true
-EOF
-
 {{- end }}
-{{- end }}
+{{ end }}
