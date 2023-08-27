@@ -1,10 +1,10 @@
-{{ if eq .chezmoi.os "linux" }}
+{{ if eq .chezmoi.os "linux" -}}
 {{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
 alias aenv="source venv/bin/activate"
 alias botsetup="cd /mnt/e/Gitea/BotSetup && aenv"
 alias infra="cd /mnt/e/Gitea/Infra/ansible && aenv"
-{{ end }}
-{{ end }}
+{{ end -}}
+{{ end -}}
 
 alias tester="docker run --rm -it --name=test --tmpfs /config:rw -e TZ=${TZ} -e PUID=$(id -u) -e PGID=$(id -g)"
 alias texec="docker exec -it test /bin/bash"
