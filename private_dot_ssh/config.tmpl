@@ -2,6 +2,7 @@
 Host *
     User roxedus
     AddKeysToAgent yes
+
 {{ (bitwarden "item" "ssh_config").notes }}
 {{ if eq .chezmoi.os "darwin" }}
 {{ keyring "ssh_config" "work_remotes" | replaceAllRegex "\\\\n" "\n" }}
