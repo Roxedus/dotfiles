@@ -1,0 +1,4 @@
+oh-my-posh init pwsh --config ~/.config/oh-my-posh.yaml | Invoke-Expression
+{{ if eq .chezmoi.os "darwin" -}}
+Add-Content -Path $PROFILE.CurrentUserAllHosts -Value '$(/opt/homebrew/bin/brew shellenv) | Invoke-Expression'
+{{ end -}}
