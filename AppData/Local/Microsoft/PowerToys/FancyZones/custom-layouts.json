@@ -1,0 +1,72 @@
+{
+  "custom-layouts": [
+    {
+      "uuid": "{2902DC06-B4DB-48C6-BAA0-F207A25BA601}",
+      "name": "Effektiv Ultrawide",
+      "type": "grid",
+      "info": {
+        "rows": 2,
+        "columns": 3,
+        "rows-percentage": [
+          5000,
+          5000
+        ],
+        "columns-percentage": [
+          2500,
+          5000,
+          2500
+        ],
+        "cell-child-map": [
+          [
+            0,
+            2,
+            3
+          ],
+          [
+            1,
+            2,
+            3
+          ]
+        ],
+        "show-spacing": false,
+        "spacing": 16,
+        "sensitivity-radius": 20
+      }
+    },
+    {
+      "uuid": "{8C6B9728-E2F8-48DC-A4FC-6A6199ECDDE8}",
+      "name": "Effektiv Ultrawide Potrett",
+      "type": "grid",
+      "info": {
+        "rows": 4,
+        "columns": 1,
+        "rows-percentage": [
+          3333,
+          1905,
+          2380,
+          2382
+        ],
+        "columns-percentage": [
+          10000
+        ],
+        "cell-child-map": [
+          [
+            0
+          ],
+          [
+            1
+          ],
+          [
+            2
+          ],
+          [
+            3
+          ]
+        ],
+        "show-spacing": false,
+        "spacing": 0,
+        "sensitivity-radius": 20
+      }
+    }
+  ]
+}
