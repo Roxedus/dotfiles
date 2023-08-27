@@ -38,7 +38,9 @@ if [ -t 0 ]; then
 
     {{ if eq .chezmoi.os "linux" -}}
     export GPG_TTY=$(tty)
+    {{ if ne .chezmoi.hostname "code-server" }}
     VSCODE=code-insiders
+    {{ end }}
     {{ end }}
     export ZSH=$HOME/.oh-my-zsh
 
