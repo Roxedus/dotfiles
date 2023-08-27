@@ -7,54 +7,81 @@ blocks:
       - style: plain
         template: ╭─{{ if .SSHSession }}[]{{ end }}[<#ffff55>{{ .UserName }}</><#ff5555>@</><#55ff55>{{ .HostName }}</>]─
         type: session
-      - foreground: "#ff5555"
-        style: plain
+      - style: plain
+        template: <#ffffff>[</><b>{{ .Name }}</b><#ffffff>]-</>
+        type: shell
+        foreground: "#ffff55"
+        properties:
+          mapped_shell_names:
+            pwsh: "PS"
+            bash: "B"
+            zsh: "Z"
+      - style: plain
         template: <#ffffff>[</>{{ .Path }}<#ffffff>]</>
         type: path
-      - foreground: "#FF9248"
-        style: plain
+        foreground: "#ff5555"
+      - style: plain
         template: <#ffffff>─(</>#<#ffffff>)</>
         type: root
+        foreground: "#FF9248"
     type: prompt
   - alignment: right
     segments:
-      - foreground: "#FFE873"
-        style: plain
-        template: <#ffffff>(</>{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}<#ffffff>)</>
+      - background: "#FFD43B"
+        foreground: "#306998"
+        powerline_symbol: "\uE0B0"
+        style: powerline
+        template: " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}"
         type: python
-      - foreground: "#faa029"
-        style: plain
-        template: <#ffffff>(</>{{.Profile}}{{if .Region}}@{{.Region}}{{end}}<#ffffff>)</>
+      - background: "#FF9900"
+        foreground: "#000000"
+        powerline_symbol: "\uE0B0"
+        style: powerline
+        template: " \ue7ad {{.Profile}}{{if .Region}}@{{.Region}}{{end}}"
         type: aws
-      - foreground: "#316ce4"
-        style: plain
-        template: "<#ffffff>(</>{{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}}<#ffffff>)</>"
+      - background: "#008AD7"
+        foreground: "#323130"
+        powerline_symbol: "\uE0B0"
+        style: powerline
+        template: " \uFD03 {{ .User.Type }}{{ if not .IsDefault }}@{{ .Name }}{{ end }}"
+        type: az
+      - background: "#844FBA"
+        foreground: "#ffffff"
+        powerline_symbol: "\uE0B0"
+        style: powerline
+        type: terraform
+      - background: "#326ce5"
+        foreground: "#ffffff"
+        powerline_symbol: "\uE0B0"
+        style: powerline
+        template: " {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}}"
         type: kubectl
-      - foreground: "#ffffff"
-        properties:
-          linux: <#ffffff></>
-          macos: <#ffffff></>
-          windows: <#ffffff></>
-        style: plain
-        template: <#ffffff>(</>{{ if .WSL }}WSL at {{ end }}{{.Icon}}<#ffffff>)─</>
+      - background: "#b6131b"
+        foreground: "#ffffff"
+        powerline_symbol: "\uE0B0"
+        style: powerline
+        template: " {{ if .WSL }}WSL at {{ end }}{{.Icon}} "
         type: os
-      - foreground: "#ffffff"
-        foreground_templates:
+      - foreground: "#000000"
+        background_templates:
           - '{{if eq "Charging" .State.String}}#40c4ff{{end}}'
           - '{{if eq "Discharging" .State.String}}#FFFB38{{end}}'
           - '{{if eq "Full" .State.String}}#33DD2D{{end}}'
+        powerline_symbol: "\uE0B0"
         properties:
           charged_icon: " "
           charging_icon: " "
           discharging_icon: " "
-        style: plain
-        template: <#ffffff>[</>{{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}%<#ffffff>]─</>
+        style: powerline
+        template: "{{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}%"
         type: battery
-      - foreground: "#55ffff"
+      - background: "#55ffff"
+        foreground: "#000000"
+        powerline_symbol: "\uE0B0"
         properties:
           time_format: "15:04"
-        style: plain
-        template: <#ffffff>[</>{{ .CurrentDate | date .Format }}<#ffffff>]</>
+        style: powerline
+        template: "{{ .CurrentDate | date .Format }}"
         type: time
     type: prompt
   - alignment: left
