@@ -68,6 +68,11 @@ if [ -t 0 ]; then
 
     export PATH="$PATH:$HOME/.local/bin"
 
+    {{ if .integrations.hishtory -}}
+    {{ template "hishtory_env.tmpl" . }}
+    source $HOME/$HISHTORY_PATH/config.zsh
+    {{ end }}
+
     {{ template "wsl_env.tmpl" . }}
 
     fpath=($HOME/.zsh/completion $fpath)

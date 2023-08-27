@@ -1,11 +1,17 @@
 manage_bin: true
 bin:
+  hishtory: 0.208
   bitwarden: 2023.5.0
   oh_my_posh: 17.9.0
 
 integrations:
+  hishtory: true
   bitwarden: true
   oh_my_posh: true
+
+integration:
+  hishtory:
+    server: http://10.0.0.30:5453
 
 email: me@roxedus.dev
 name: Roxedus

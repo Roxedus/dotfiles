@@ -1,0 +1,12 @@
+{{- if ne .chezmoi.os "windows" -}}
+{{- if .integrations.hishtory -}}
+#!/bin/bash
+
+{{ template "hishtory_env.tmpl" . }}
+{{ if .integrations.bitwarden }}
+hishtory init {{ (bitwardenFields "item" "dotfiles").hishtory_user_secret.value }}
+{{ else }}
+hishtory init --offline
+{{ end -}}
+{{ end -}}
+{{ end }}

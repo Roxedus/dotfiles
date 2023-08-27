@@ -1,0 +1,5 @@
+{{ if .integrations.bitwarden -}}
+export HISHTORY_SERVER={{ .integration.hishtory.server }}
+{{ end -}}
+export HISHTORY_PATH=".config/hishtory"
+export PATH="$PATH:$HOME/$HISHTORY_PATH"
