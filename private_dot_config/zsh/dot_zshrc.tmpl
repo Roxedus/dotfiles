@@ -26,11 +26,11 @@ plugins=(
     ssh-agent
     virtualenv
     vscode
-{{ if eq .chezmoi.os "linux" -}}
-{{ if eq .chezmoi.osRelease.name "Ubuntu" -}}
+    {{ if eq .chezmoi.os "linux" -}}
+    {{ if eq .chezmoi.osRelease.name "Ubuntu" -}}
     ubuntu
-{{ end -}}
-{{ end -}}
+    {{ end -}}
+    {{ end -}}
     )
 
 zstyle :omz:plugins:ssh-agent agent-forwarding on
