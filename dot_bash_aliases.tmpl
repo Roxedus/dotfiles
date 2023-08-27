@@ -3,9 +3,15 @@ alias texec="docker exec -it test /bin/bash"
 alias dive="docker run --rm -it --name=dive -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest"
 alias sudo="sudo "
 
-alias sync="docker pull ${builder:=lscr.io/linuxserver/jenkins-builder\:latest} && docker run --rm \
+alias sync="docker pull lscr.io/linuxserver/jenkins-builder\:latest && docker run --rm \
   -v $(pwd):/tmp \
   -e LOCAL=true \
   -e PUID=$(id -u) -e PGID=$(id -g) \
-  ${builder:=lscr.io/linuxserver/jenkins-builder\:latest} && \
-[ -n $noDelete ] && rm -rf .jenkins-external"
+  lscr.io/linuxserver/jenkins-builder\:latest && \
+  rm -rf .jenkins-external"
+
+alias test_sync="docker pull jenkins-builder:latest && docker run --rm \
+  -v $(pwd):/tmp \
+  -e LOCAL=true \
+  -e PUID=$(id -u) -e PGID=$(id -g) \
+  jenkins-builder:latest"
