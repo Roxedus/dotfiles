@@ -14,9 +14,10 @@ export PATH="$PATH:$HOME/.local/bin"
 {{ template "wsl_env.tmpl" . }}
 
 {{ if .integration.hishtory.enabled -}}
-{{- template "hishtory_env.tmpl" . }}
+{{ template "hishtory_env.tmpl" . -}}
 source $HOME/$HISHTORY_PATH/config.sh
-{{ end }}
+
+{{ end -}}
 
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh.yaml)"
-{{ end }}
+{{ end -}}
