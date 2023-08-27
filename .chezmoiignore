@@ -4,8 +4,6 @@ Documents/
 AppData/
 {{- end }}
 {{- if eq .chezmoi.os "windows" }}
-.config/powershell/Microsoft.PowerShell_profile.ps1
-Documents/
 .config/zsh
 {{- end }}
 {{- if eq .chezmoi.os "linux" }}
