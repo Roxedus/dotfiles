@@ -83,6 +83,9 @@ if [ -t 0 ]; then
     (( $+commands[bat] )) && alias cat=bat
     (( $+commands[bw] )) && eval "$(bw completion --shell zsh); compdef _bw bw;"
     (( $+commands[chezmoi] )) && source <(chezmoi completion zsh)
+    (( $+commands[kubecolor] )) && source <(kubectl completion zsh)
+    (( $+commands[kubecolor] )) && alias kubectl=kubecolor
+    (( $+commands[kubecolor] )) && compdef kubecolor=kubectl
 
     if [ -f ~/.bash_aliases ]; then
         . ~/.bash_aliases
