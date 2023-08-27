@@ -17,24 +17,27 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
-{{ if .manage_bin -}}
-{{ if .integrations.hishtory -}}
+{{ if .integration.hishtory.managed -}}
+{{ $hishVersion := .integration.hishtory.version -}}
+{{- if eq .integration.hishtory.version "latest" }}
+{{ $hishVersion = (gitHubLatestRelease "ddworken/hishtory").TagName -}}
+{{ end }}
 [".config/hishtory/hishtory"]
     type = "file"
     executable = true
-    url = "https://github.com/ddworken/hishtory/releases/download/v{{ .bin.hishtory }}/hishtory-{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
+    url = "https://github.com/ddworken/hishtory/releases/download/v{{ $hishVersion }}/hishtory-{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
 [".config/hishtory/config.zsh"]
     type = "file"
     executable = true
-    url = "https://raw.githubusercontent.com/ddworken/hishtory/v{{ .bin.hishtory }}/client/lib/config.zsh"
+    url = "https://raw.githubusercontent.com/ddworken/hishtory/v{{ $hishVersion }}/client/lib/config.zsh"
 [".config/hishtory/config.sh"]
     type = "file"
     executable = true
-    url = "https://raw.githubusercontent.com/ddworken/hishtory/v{{ .bin.hishtory }}/client/lib/config.sh"
+    url = "https://raw.githubusercontent.com/ddworken/hishtory/v{{ $hishVersion }}/client/lib/config.sh"
 {{ end }}
-{{ if .integrations.oh_my_posh -}}
-{{ $ompVersion := nospace (cat "v" .bin.oh_my_posh) -}}
-{{- if eq .bin.oh_my_posh "latest" }}
+{{ if .integration.oh_my_posh.managed -}}
+{{ $ompVersion := nospace (cat "v" .integration.oh_my_posh.version) -}}
+{{- if eq .integration.oh_my_posh.version "latest" }}
 {{ $ompVersion = (gitHubLatestRelease "JanDeDobbeleer/oh-my-posh").TagName -}}
 {{ end }}
 [".local/bin/oh-my-posh"]
@@ -42,16 +45,15 @@
     executable = true
     url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/{{ $ompVersion }}/posh-{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
 {{ end }}
-{{ if .integrations.bitwarden -}}
+{{ if .integration.bitwarden.managed -}}
 [".local/bin"]
     type = "archive"
     executable = true
     include = ["bw"]
 {{ if eq .chezmoi.os "darwin" -}}
-    url = "https://github.com/bitwarden/clients/releases/download/cli-v{{ .bin.bitwarden }}/bw-macos-{{ .bin.bitwarden }}.zip"
+    url = "https://github.com/bitwarden/clients/releases/download/cli-v{{ .integration.bitwarden.version }}/bw-macos-{{ .integration.bitwarden.version }}.zip"
 {{ else -}}
-    url = "https://github.com/bitwarden/clients/releases/download/cli-v{{ .bin.bitwarden }}/bw-{{ .chezmoi.os -}}-{{ .bin.bitwarden }}.zip"
-{{ end }}
+    url = "https://github.com/bitwarden/clients/releases/download/cli-v{{ .integration.bitwarden.version }}/bw-{{ .chezmoi.os -}}-{{ .integration.bitwarden.version }}.zip"
 {{ end }}
 {{ end }}
 {{ if eq .chezmoi.os "darwin" -}}

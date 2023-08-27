@@ -7,6 +7,9 @@ brew "age"
 brew "argocd"
 brew "azure-cli"
 brew "bat"
+{{ if and (not .integration.bitwarden.managed) .integration.bitwarden.enabled -}}
+brew "bitwarden-cli"
+{{ end -}}
 brew "bpython"
 brew "chroma"
 brew "flux"

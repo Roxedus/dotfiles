@@ -1,5 +1,5 @@
 {{- if lookPath "oh-my-posh" -}}
-{{- if .integrations.oh_my_posh -}}
+{{- if .integration.oh_my_posh.enabled -}}
 {{- if eq .chezmoi.os "windows" -}}
 if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
   if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {

@@ -13,7 +13,7 @@ export PATH="$PATH:$HOME/.local/bin"
 
 {{ template "wsl_env.tmpl" . }}
 
-{{ if .integrations.hishtory -}}
+{{ if .integration.hishtory.enabled -}}
 {{- template "hishtory_env.tmpl" . }}
 source $HOME/$HISHTORY_PATH/config.sh
 {{ end }}

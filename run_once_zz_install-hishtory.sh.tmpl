@@ -1,9 +1,9 @@
 {{- if ne .chezmoi.os "windows" -}}
-{{- if .integrations.hishtory -}}
+{{- if .integration.hishtory.enabled -}}
 #!/bin/bash
 
 {{ template "hishtory_env.tmpl" . }}
-{{ if .integrations.bitwarden }}
+{{ if .integration.bitwarden.enabled }}
 hishtory init {{ (bitwardenFields "item" "dotfiles").hishtory_user_secret.value }}
 {{ else }}
 hishtory init --offline

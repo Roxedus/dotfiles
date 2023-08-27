@@ -50,51 +50,52 @@ zstyle :omz:update mode disabled
 
 source $ZSH/oh-my-zsh.sh
 
-if [ -t 0 ]; then
+# if [ -t 0 ]; then # why?
 
-    {{ if eq .chezmoi.os "linux" -}}
-    export GPG_TTY=$(tty)
-    {{ if not ( contains "code-server" .chezmoi.hostname) -}}
-    VSCODE=code-insiders
-    {{ end -}}
-    {{ end -}}
+{{ if eq .chezmoi.os "linux" -}}
+export GPG_TTY=$(tty)
+{{ if not ( contains "code-server" .chezmoi.hostname) -}}
+VSCODE=code-insiders
+{{ end -}}
+{{ end -}}
 
-    {{ if eq .chezmoi.os "darwin" -}}
-    source ~/.config/iterm2.sh
-    {{ end -}}
+{{ if eq .chezmoi.os "darwin" -}}
+source ~/.config/iterm2.sh
+{{ end -}}
 
-    alias zshconfig="${EDITOR} $ZDOTDIR/.zshrc"
-    alias ohmyzsh="${EDITOR} $ZSH"
+alias zshconfig="${EDITOR} $ZDOTDIR/.zshrc"
+alias ohmyzsh="${EDITOR} $ZSH"
 
-    export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
-    {{ if .integrations.hishtory -}}
-    {{ template "hishtory_env.tmpl" . }}
-    source $HOME/$HISHTORY_PATH/config.zsh
-    {{ end }}
+{{ if .integration.hishtory.enabled -}}
+{{ template "hishtory_env.tmpl" . }}
+source $HOME/$HISHTORY_PATH/config.zsh
+{{ end }}
 
-    {{ template "wsl_env.tmpl" . }}
+{{ template "wsl_env.tmpl" . }}
 
-    fpath=($HOME/.zsh/completion $fpath)
+fpath=($HOME/.zsh/completion $fpath)
 
-    #    autoload -U +X bashcompinit && bashcompinit
-    #    autoload -Uz compinit && compinit
+#    autoload -U +X bashcompinit && bashcompinit
+#    autoload -Uz compinit && compinit
 
-    (( $+_comps[argocd] )) && source <(argocd completion zsh)
-    (( $+_comps[chezmoi] )) && source <(chezmoi completion zsh)
-    (( $+_comps[helm] )) && source <(helm completion zsh)
+(( $+_comps[argocd] )) && source <(argocd completion zsh)
+(( $+_comps[chezmoi] )) && source <(chezmoi completion zsh)
+(( $+_comps[helm] )) && source <(helm completion zsh)
 
-    (( $+commands[bat] )) && alias cat=bat && alias rcat=/bin/cat
+(( $+commands[bat] )) && alias cat=bat && alias rcat=/bin/cat
 
-    {{ if .integrations.bitwarden -}}
-    (( $+_comps[bw] )) && eval "$(bw completion --shell zsh); compdef _bw bw;"
-    alias bwopen='export BW_SESSION=$(bw unlock --raw)'
-    {{- end }}
+{{ if .integration.bitwarden.enabled -}}
+(( $+_comps[bw] )) && eval "$(bw completion --shell zsh); compdef _bw bw;"
+alias bwopen='export BW_SESSION=$(bw unlock --raw)'
+{{- end }}
 
-    if [ -f ~/.bash_aliases ]; then
-        . ~/.bash_aliases
-    fi
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
 fi
+#fi
+
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
     eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh.yaml)"
 fi
