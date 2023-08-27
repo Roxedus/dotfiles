@@ -4,6 +4,9 @@
 {{ end }}
 
 export EDITOR=nano
+
+(( $+commands[vim] )) && export EDITOR=vim
+
 export ZSH=$HOME/.oh-my-zsh
 
 HIST_STAMPS="%d/%m/%y %T"
