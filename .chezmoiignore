@@ -5,6 +5,8 @@ AppData/
 {{- end }}
 {{- if eq .chezmoi.os "windows" }}
 .config/zsh
+.bashrc
+.bash_aliases
 {{- end }}
 {{- if eq .chezmoi.os "linux" }}
 {{- if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
