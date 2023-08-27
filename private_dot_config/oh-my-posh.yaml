@@ -52,6 +52,12 @@ blocks:
         powerline_symbol: "\uE0B0"
         style: powerline
         type: terraform
+      - background: "#0b59e7"
+        foreground: "#000000"
+        powerline_symbol: "\uE0B0"
+        style: powerline
+        template: ' {{ if ne .Context "default" }} {{ .Context }}{{end}} '
+        type: docker
       - background: "#326ce5"
         foreground: "#ffffff"
         powerline_symbol: "\uE0B0"
