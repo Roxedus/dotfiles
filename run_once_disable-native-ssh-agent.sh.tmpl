@@ -1,0 +1,9 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+launchctl disable gui/501/com.openssh.ssh-agent
+launchctl stop com.openssh.ssh-agent
+
+# https://apple.stackexchange.com/questions/440277/disable-enable-launchd-daemon-agents
+# https://evilmartians.com/chronicles/stick-with-security-yubikey-ssh-gnupg-macos
+
+{{ end -}}
