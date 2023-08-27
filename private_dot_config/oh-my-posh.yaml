@@ -1,8 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
 
 blocks:
-  - type: prompt
-    alignment: left
+  - alignment: left
     segments:
       - style: plain
         template: ╭─{{ if .SSHSession }}[]{{ end }}[<#ffff55>{{ .UserName }}</><#ff5555>@</><#55ff55>{{ .HostName }}</>]─
@@ -24,7 +23,7 @@ blocks:
         template: <#ffffff>─(</>#<#ffffff>)</>
         type: root
         foreground: "#FF9248"
-
+    type: prompt
   - alignment: right
     segments:
       - background: "#FFD43B"
