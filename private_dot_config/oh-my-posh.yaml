@@ -1,0 +1,101 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+
+$schema: https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+blocks:
+  - alignment: left
+    segments:
+      - style: plain
+        template: ╭─{{ if .SSHSession }}[]{{ end }}[<#ffff55>{{ .UserName }}</><#ff5555>@</><#55ff55>{{ .HostName }}</>]─
+        type: session
+      - foreground: "#ff5555"
+        style: plain
+        template: <#ffffff>[</>{{ .Path }}<#ffffff>]</>
+        type: path
+      - foreground: "#FF9248"
+        style: plain
+        template: <#ffffff>─(</>#<#ffffff>)</>
+        type: root
+    type: prompt
+  - alignment: right
+    segments:
+      - foreground: "#FFE873"
+        style: plain
+        template: <#ffffff>(</>{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}<#ffffff>)</>
+        type: python
+      - foreground: "#faa029"
+        style: plain
+        template: <#ffffff>(</>{{.Profile}}{{if .Region}}@{{.Region}}{{end}}<#ffffff>)</>
+        type: aws
+      - foreground: "#316ce4"
+        style: plain
+        template: "<#ffffff>(</>{{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}}<#ffffff>)</>"
+        type: kubectl
+      - foreground: "#ffffff"
+        properties:
+          linux: <#ffffff></>
+          macos: <#ffffff></>
+          windows: <#ffffff></>
+        style: plain
+        template: <#ffffff>(</>{{ if .WSL }}WSL at {{ end }}{{.Icon}}<#ffffff>)─</>
+        type: os
+      - foreground: "#ffffff"
+        foreground_templates:
+          - '{{if eq "Charging" .State.String}}#40c4ff{{end}}'
+          - '{{if eq "Discharging" .State.String}}#FFFB38{{end}}'
+          - '{{if eq "Full" .State.String}}#33DD2D{{end}}'
+        properties:
+          charged_icon: " "
+          charging_icon: " "
+          discharging_icon: " "
+        style: plain
+        template: <#ffffff>[</>{{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}%<#ffffff>]─</>
+        type: battery
+      - foreground: "#55ffff"
+        properties:
+          time_format: "15:04"
+        style: plain
+        template: <#ffffff>[</>{{ .CurrentDate | date .Format }}<#ffffff>]</>
+        type: time
+    type: prompt
+  - alignment: left
+    newline: true
+    segments:
+      - style: plain
+        template: ╰─
+        type: text
+      - foreground: "#e0f8ff"
+        properties:
+          branch_icon: " "
+          fetch_status: true
+          fetch_upstream_icon: true
+        style: plain
+        template: <#ffffff>[</>{{ .HEAD }}{{ if .Staging.Changed }}<#00AA00> ● {{ .Staging.String }}</>{{ end }}{{ if .Working.Changed }}<#D75F00> ● {{ .Working.String }}</>{{ end }}<#ffffff>]-</>
+        type: git
+      - foreground: "#ecf7fa"
+        foreground_templates:
+          - "{{ if gt .Code 0 }}#ef5350{{ end }}"
+        properties:
+          always_enabled: true
+        style: plain
+        template: "ﬀ "
+        type: exit
+    type: prompt
+console_title_template: "{{.UserName}}@{{.HostName}} {{.Shell}} in {{.PWD}}"
+error_line:
+  background: transparent
+  foreground: "#ffffff"
+  template: "<#eb6f92,#286983> </><#286983,transparent></> "
+osc99: true
+secondary_prompt:
+  background: transparent
+  foreground: "#133b55"
+  template: "-> "
+transient_prompt:
+  background: transparent
+  foreground: "#6033df"
+  template: "{{ .Shell }}> "
+valid_line:
+  background: transparent
+  foreground: "#ffffff"
+  template: "<#e0def4,#286983> </><#286983,transparent></> "
+version: 2
