@@ -1,7 +1,7 @@
-{{ if ne .chezmoi.os "windows" }}
-{{ if ne .chezmoi.hostname (or ("code-server") ("vscode-server")) }}
+{{- if ne .chezmoi.os "windows" -}}
+{{- if not ( contains "code-server" .chezmoi.hostname) -}}
 eval "$({{ if eq .chezmoi.os "linux" }}/home/linuxbrew/.linuxbrew{{ else if eq .chezmoi.os "darwin" -}}/opt/homebrew{{ end }}/bin/brew shellenv)"
-{{- end }}
+{{- end -}}
 eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh.yaml)"
 
 export EDITOR=nano
@@ -31,7 +31,7 @@ plugins=(
     {{ if eq .chezmoi.os "darwin" -}}
     iterm2
     {{ end -}}
-    {{ if ne .chezmoi.hostname (or ("code-server") ("vscode-server")) -}}
+    {{ if not ( contains "code-server" .chezmoi.hostname) -}}
     gpg-agent
     vscode
     {{ end -}}
@@ -52,7 +52,7 @@ if [ -t 0 ]; then
 
     {{ if eq .chezmoi.os "linux" -}}
     export GPG_TTY=$(tty)
-    {{ if ne .chezmoi.hostname (or ("code-server") ("vscode-server")) -}}
+    {{ if not ( contains "code-server" .chezmoi.hostname) -}}
     VSCODE=code-insiders
     {{ end -}}
     {{ end -}}
