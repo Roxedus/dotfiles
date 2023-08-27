@@ -16,3 +16,9 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
+{{ if eq .chezmoi.os "darwin" -}}
+[".config/iterm2.sh"]
+    type = "file"
+    url = "https://iterm2.com/shell_integration/zsh"
+    refreshPeriod = "168h"
+{{ end }}

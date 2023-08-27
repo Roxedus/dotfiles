@@ -27,6 +27,9 @@ plugins=(
     virtualenv
     zsh-autosuggestions
     zsh-syntax-highlighting
+    {{ if eq .chezmoi.os "darwin" -}}
+    iterm2
+    {{ end }}
     {{ if ne .chezmoi.hostname "code-server" -}}
     gpg-agent
     vscode
@@ -53,6 +56,9 @@ if [ -t 0 ]; then
     {{ end -}}
     {{ end -}}
 
+    {{- if eq .chezmoi.os "darwin" }}
+    source ~/.config/iterm2.sh
+    {{- end }}
 
     alias zshconfig="${EDITOR} $ZDOTDIR/.zshrc"
     alias ohmyzsh="${EDITOR} $ZSH"
