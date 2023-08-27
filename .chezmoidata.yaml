@@ -14,6 +14,8 @@ integration:
     enabled: true
     managed: true
     version: latest
+  zsh:
+    enabled: true
 
 email: me@roxedus.dev
 name: Roxedus
