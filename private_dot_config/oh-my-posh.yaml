@@ -63,9 +63,9 @@ blocks:
         type: os
       - foreground: "#000000"
         background_templates:
-          - '{{if eq "Charging" .State.String}}#40c4ff{{end}}'
-          - '{{if eq "Discharging" .State.String}}#FFFB38{{end}}'
-          - '{{if eq "Full" .State.String}}#33DD2D{{end}}'
+          - "{{if eq \"Charging\" .State.String}}#40c4ff{{end}}"
+          - "{{if eq \"Discharging\" .State.String}}#FFFB38{{end}}"
+          - "{{if eq \"Full\" .State.String}}#33DD2D{{end}}"
         powerline_symbol: "\uE0B0"
         properties:
           charged_icon: " "
