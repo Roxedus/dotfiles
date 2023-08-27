@@ -117,8 +117,13 @@ if ! shopt -oq posix; then
 fi
 
 ####
+{{ if lookPath "brew" }}
+{{ template "brew_env.tmpl" . -}}
+{{ end }}
 
 export EDITOR=nano
+
+{{ template "wsl_env.tmpl" . }}
 
 {{ if eq .chezmoi.os "linux" -}}
 {{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
