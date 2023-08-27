@@ -1,0 +1,3 @@
+{{ if ne .chezmoi.hostname "code-server"  -}}
+{{ (bitwarden "item" "ssh_config").notes }}
+{{ end }}
