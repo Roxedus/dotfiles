@@ -64,7 +64,7 @@ if [ -t 0 ]; then
     alias zshconfig="${EDITOR} $ZDOTDIR/.zshrc"
     alias ohmyzsh="${EDITOR} $ZSH"
 
-    export PATH="$PATH:~/.local/bin"
+    export PATH="$PATH:$HOME/.local/bin"
 
     {{ if eq .chezmoi.os "linux" -}}
     {{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
@@ -74,7 +74,7 @@ if [ -t 0 ]; then
     export FIGNORE=".dll:.DLL:.exe:.EXE"
     {{ end -}}
     {{ end -}}
-    fpath=(~/.zsh/completion $fpath)
+    fpath=($HOME/.zsh/completion $fpath)
 
     autoload -U +X bashcompinit && bashcompinit
     autoload -Uz compinit && compinit
