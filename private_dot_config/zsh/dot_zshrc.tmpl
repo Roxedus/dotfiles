@@ -59,9 +59,9 @@ if [ -t 0 ]; then
     {{ end -}}
     {{ end -}}
 
-    {{- if eq .chezmoi.os "darwin" }}
+    {{ if eq .chezmoi.os "darwin" -}}
     source ~/.config/iterm2.sh
-    {{- end }}
+    {{ end -}}
 
     alias zshconfig="${EDITOR} $ZDOTDIR/.zshrc"
     alias ohmyzsh="${EDITOR} $ZSH"
