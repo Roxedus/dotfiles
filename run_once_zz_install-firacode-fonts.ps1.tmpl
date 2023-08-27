@@ -8,10 +8,8 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
     Exit
   }
 }
-{{- else if ne .chezmoi.os "windows" -}}
-#!/bin/bash
-{{- end }}
 
 oh-my-posh font install firacode
+{{ end -}}
+{{ end -}}
 {{- end }}
-{{ end }}

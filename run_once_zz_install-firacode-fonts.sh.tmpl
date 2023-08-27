@@ -1,0 +1,9 @@
+{{- if lookPath "oh-my-posh" -}}
+{{- if .integration.oh_my_posh.enabled -}}
+{{- if ne .chezmoi.os "windows" -}}
+#!/bin/bash
+{{- end }}
+
+oh-my-posh font install firacode
+{{- end }}
+{{ end }}
