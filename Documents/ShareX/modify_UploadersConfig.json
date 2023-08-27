@@ -1,0 +1,35 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- $ImgurInfo := dict
+  "Client_ID" (bitwardenFields "item" "Sharex").imgur_client.value
+  "Client_Secret" (bitwardenFields "item" "Sharex").imgur_secret.value
+  "Token" nil
+  "Proof" nil
+-}}
+
+{{- $CustomUploadersList := list (dict
+  "Version" "14.1.0"
+  "DestinationType" "ImageUploader, TextUploader, FileUploader"
+  "RequestMethod" "POST"
+  "RequestURL" "https://images.roxedus.net/upload"
+  "Body" "MultipartFormData"
+  "FileFormName" "upload"
+  "URL" "{json:url}/raw"
+  "ThumbnailURL" "{json:url}/raw"
+  "DeletionURL" (nospace (cat "{json:url}/delete/" (bitwardenFields "item" "Sharex").xbb_api_token.value))
+  "ErrorMessage" nil
+  "Arguments" (dict
+    "file" "{filename}"
+    "text" "{input}"
+    "token" (bitwardenFields "item" "Sharex").xbb_api_token.value
+  )
+)
+-}}
+
+{{ fromJson .chezmoi.stdin |
+  setValueAtPath "ImgurOAuth2Info" $ImgurInfo |
+  setValueAtPath "CustomUploadersList" $CustomUploadersList |
+  setValueAtPath "CustomImageUploaderSelected" "0" |
+  setValueAtPath "CustomTextUploaderSelected" "0" |
+  setValueAtPath "CustomFileUploaderSelected" "0" |
+  toPrettyJson
+}}
