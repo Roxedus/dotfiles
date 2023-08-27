@@ -80,10 +80,12 @@ fpath=($HOME/.zsh/completion $fpath)
 
 #    autoload -U +X bashcompinit && bashcompinit
 #    autoload -Uz compinit && compinit
-
+{{ if .machine.controlplane -}}
 (( $+_comps[argocd] )) && source <(argocd completion zsh)
-(( $+_comps[chezmoi] )) && source <(chezmoi completion zsh)
 (( $+_comps[helm] )) && source <(helm completion zsh)
+{{ end -}}
+(( $+_comps[chezmoi] )) && source <(chezmoi completion zsh)
+(( $+_comps[hishtory] )) && source <(hishtory completion zsh)
 
 (( $+commands[bat] )) && alias cat=bat && alias rcat=/bin/cat
 

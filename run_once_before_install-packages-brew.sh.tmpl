@@ -4,27 +4,29 @@
 brew bundle --no-lock --file=/dev/stdin <<EOF
 brew "gcc"
 brew "age"
-brew "argocd"
-brew "azure-cli"
 brew "bat"
 {{ if and (not .integration.bitwarden.managed) .integration.bitwarden.enabled -}}
 brew "bitwarden-cli"
 {{ end -}}
 brew "bpython"
 brew "chroma"
-brew "flux"
 brew "git"
-brew "helm"
 brew "jq"
-brew "k9s"
 brew "pygments"
-brew "sops"
 brew "syft"
+brew "yq"
+{{ if .machine.controlplane -}}
+brew "argocd"
+brew "azure-cli"
+brew "helm"
+brew "k9s"
+brew "sops"
 brew "terraform"
 brew "terragrunt"
-brew "yq"
 tap "azure/bicep"
+{{ end -}}
 {{ if eq .chezmoi.os "darwin" -}}
+brew "fluxcd/tap/flux"
 brew "git"
 brew "htop"
 brew "openssh"

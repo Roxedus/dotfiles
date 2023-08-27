@@ -17,6 +17,9 @@ integration:
   zsh:
     enabled: true
 
+machine:
+  controlplane: false
+
 email: me@roxedus.dev
 name: Roxedus
 
