@@ -13,7 +13,7 @@
 {{- else if eq .git.format "gpg" }}
 	program = gpg
 {{ end -}}
-{{ end -}}
+{{ end }}
 [core]
 	longpaths = true
 	autocrlf = false
@@ -22,6 +22,6 @@
 	defaultBranch = "main"
 [credential]
 	helper = {{ .git.helper }}
-{{ if .git.store }}
+{{- if .git.store }}
 	credentialStore = {{ .git.store }}
 {{ end }}

@@ -5,7 +5,7 @@ source /etc/skel/.bashrc
 
 ####
 {{ if lookPath "brew" }}
-{{ template "brew_env.tmpl" . -}}
+{{- template "brew_env.tmpl" dict "shell" "bash" "os" .chezmoi.os -}}
 {{ end }}
 
 export EDITOR=nano

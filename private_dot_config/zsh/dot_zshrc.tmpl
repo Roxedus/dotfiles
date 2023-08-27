@@ -1,6 +1,6 @@
 {{- if ne .chezmoi.os "windows" -}}
 {{ if lookPath "brew" }}
-{{- template "brew_env.tmpl" . -}}
+{{- template "brew_env.tmpl" dict "shell" "zsh" "os" .chezmoi.os -}}
 {{ end }}
 
 export EDITOR=nano
@@ -71,9 +71,9 @@ export PATH="$PATH:$HOME/.local/bin"
 {{ if .integration.hishtory.enabled -}}
 {{ template "hishtory_env.tmpl" . }}
 source $HOME/$HISHTORY_PATH/config.zsh
-{{ end }}
+{{- end }}
 
-{{ template "wsl_env.tmpl" . }}
+{{- template "wsl_env.tmpl" . }}
 
 fpath=($HOME/.zsh/completion $fpath)
 
