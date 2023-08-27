@@ -1,0 +1,17 @@
+{{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
+alias aenv="source venv/bin/activate"
+alias botsetup="cd /mnt/e/Gitea/BotSetup && aenv"
+alias infra="cd /mnt/e/Gitea/Infra/ansible && aenv"
+{{ end }}
+
+alias tester="docker run --rm -it --name=test --tmpfs /config:rw -e TZ=${TZ} -e PUID=$(id -u) -e PGID=$(id -g)"
+alias texec="docker exec -it test /bin/bash"
+alias dive="docker run --rm -it --name=dive -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest"
+alias sudo="sudo "
+
+alias sync="docker pull ${builder:=lscr.io/linuxserver/jenkins-builder\:latest} && docker run --rm \
+  -v $(pwd):/tmp \
+  -e LOCAL=true \
+  -e PUID=$(id -u) -e PGID=$(id -g) \
+  ${builder:=lscr.io/linuxserver/jenkins-builder\:latest} && \
+[ -n $noDelete ] && rm -rf .jenkins-external"

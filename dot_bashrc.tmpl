@@ -120,7 +120,9 @@ fi
 
 export EDITOR=nano
 
+{{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
 export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
 export PATH="$PATH:/mnt/c/Program Files/Oracle/VirtualBox"
+{{ end }}
 
-eval "$(oh-my-posh init bash --config https://gist.githubusercontent.com/Roxedus/6a11a5dbd37c24ecacf02fb9aef06e15/raw/oh-my.posh.json)"
+eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh.json)"

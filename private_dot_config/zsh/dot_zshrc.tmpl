@@ -1,0 +1,70 @@
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh.json)"
+
+export EDITOR=nano
+
+HIST_STAMPS="%d/%m/%y %T"
+HISTFILE="$ZDOTDIR/.zhistory"
+ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/ohmyzsh"
+
+plugins=(
+    ansible
+    colored-man-pages
+    colorize
+    command-not-found
+    common-aliases
+    docker
+    docker-compose
+    git
+    gpg-agent
+    terraform
+    history
+    kubectl
+    pip
+    ssh-agent
+    virtualenv
+    vscode
+{{ if eq .chezmoi.osRelease.name "Ubuntu" }}
+    ubuntu
+{{- end }}
+    )
+
+zstyle :omz:plugins:ssh-agent agent-forwarding on
+zstyle :omz:update mode disabled
+
+if [ -t 0 ]; then
+
+    {{ if eq .chezmoi.os "linux" -}}
+    export GPG_TTY=$(tty)
+    VSCODE=code-insiders
+    {{ end }}
+    export ZSH=$HOME/.oh-my-zsh
+
+    source $ZSH/oh-my-zsh.sh
+
+    eval "$(bw completion --shell zsh); compdef _bw bw;"
+
+    alias zshconfig="${EDITOR} $ZDOTDIR/.zshrc"
+    alias ohmyzsh="${EDITOR} $ZSH"
+
+    export PATH="$PATH:~/.local/bin"
+
+    {{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
+    export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
+    export PATH="$PATH:/mnt/c/Program Files/Oracle/VirtualBox"
+    export VAGRANT_WSL_WINDOWS_ACCESS_USER=Roxedus
+    export FIGNORE=".dll:.DLL:.exe:.EXE"
+    {{ end }}
+
+    fpath=(~/.zsh/completion $fpath)
+
+    autoload -U +X bashcompinit && bashcompinit
+    autoload -Uz compinit && compinit
+
+    (( $+commands[argocd] )) && source <(argocd completion zsh)
+    (( $+commands[chezmoi] )) && source <(chezmoi completion zsh)
+
+    if [ -f ~/.bash_aliases ]; then
+        . ~/.bash_aliases
+    fi
+fi
