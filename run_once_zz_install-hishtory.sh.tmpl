@@ -2,6 +2,8 @@
 {{- if .integration.hishtory.enabled -}}
 #!/bin/bash
 
+set -o pipefail
+
 {{ template "hishtory_env.tmpl" . -}}
 
 {{- $hishSecret := "--offline" -}}
@@ -10,6 +12,6 @@
 {{- else if not .integration.hishtory.offline -}}
 {{- $hishSecret = joinPath .chezmoi.sourceDir "/.encrypted_vars/hishtory.age" | include | decrypt -}}
 {{- end }}
-hishtory init {{ $hishSecret | trim }}
+hishtory init {{ $hishSecret | trim }} || true
 {{ end -}}
 {{ end }}
