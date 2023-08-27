@@ -6,3 +6,13 @@ bin:
 integrations:
   bitwarden: true
   oh_my_posh: true
+
+email: me@roxedus.dev
+name: Roxedus
+
+git:
+  sign: true
+  format: ssh
+  key: ""
+  helper: cache
+  store:

@@ -1,0 +1,27 @@
+[user]
+	email = {{ .email | quote }}
+	name = {{ .name | quote }}
+{{ if .git.sign }}
+	signingKey = {{ .git.key | quote }}
+[commit]
+	gpgSign = true
+[tag]
+	gpgSign = true
+[gpg]
+{{- if ne .git.format "gpg" }}
+    format = {{ .git.format }}
+{{- else if eq .git.format "gpg" }}
+	program = gpg
+{{ end -}}
+{{ end -}}
+[core]
+	longpaths = true
+	autocrlf = false
+	eol = lf
+[init]
+	defaultBranch = "main"
+[credential]
+	helper = {{ .git.helper }}
+{{ if .git.store }}
+	credentialStore = {{ .git.store }}
+{{ end }}
