@@ -1,7 +1,7 @@
 {
     "files.associations": {
         "{.chezmoiignore,.chezmoiremove}": "jinja",
-        "{*bash*.tmpl,*zsh*.tmpl,*.sh.tmpl}": "jinja-shell",
+        "{*_env.tmpl,*bash*.tmpl,*zsh*.tmpl,*.sh.tmpl}": "jinja-shell",
         "*.json": "jinja-json",
         "*.toml": "jinja-toml",
         "*.yaml": "jinja-yaml",
