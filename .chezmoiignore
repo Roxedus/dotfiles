@@ -12,6 +12,9 @@ AppData/
 .bashrc
 .bash_aliases
 run_*.sh
+{{- if .machine.work -}}
+Documents/ShareX
+{{- end }}
 {{- end }}
 {{- if eq .chezmoi.os "linux" }}
 {{- if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}

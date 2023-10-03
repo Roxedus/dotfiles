@@ -1,4 +1,3 @@
-{{- if ne .chezmoi.os "windows" -}}
 {{- if .integration.zsh.enabled -}}
 {{- if lookPath "brew" -}}
 {{ template "brew_env.tmpl" dict "shell" "zsh" "os" .chezmoi.os }}
@@ -102,5 +101,4 @@ fi
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
     eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh.yaml)"
 fi
-{{ end -}}
 {{ end -}}

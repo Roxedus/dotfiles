@@ -43,16 +43,6 @@
     executable = true
     url = "https://raw.githubusercontent.com/ddworken/hishtory/v{{ $hishVersion }}/client/lib/config.sh"
 {{ end }}
-{{ if .integration.oh_my_posh.managed -}}
-{{ $ompVersion := nospace (cat "v" .integration.oh_my_posh.version) -}}
-{{- if eq .integration.oh_my_posh.version "latest" }}
-{{ $ompVersion = (gitHubLatestRelease "JanDeDobbeleer/oh-my-posh").TagName -}}
-{{ end }}
-[".local/bin/oh-my-posh"]
-    type = "file"
-    executable = true
-    url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/{{ $ompVersion }}/posh-{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
-{{ end }}
 {{ if .integration.bitwarden.managed -}}
 [".local/bin"]
     type = "archive"
@@ -64,4 +54,14 @@
     url = "https://github.com/bitwarden/clients/releases/download/cli-v{{ .integration.bitwarden.version }}/bw-{{ .chezmoi.os -}}-{{ .integration.bitwarden.version }}.zip"
 {{ end }}
 {{ end }}
+{{ end }}
+{{ if .integration.oh_my_posh.managed -}}
+{{ $ompVersion := nospace (cat "v" .integration.oh_my_posh.version) -}}
+{{- if eq .integration.oh_my_posh.version "latest" }}
+{{ $ompVersion = (gitHubLatestRelease "JanDeDobbeleer/oh-my-posh").TagName -}}
+{{ end }}
+[".local/bin/oh-my-posh"]
+    type = "file"
+    executable = true
+    url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/{{ $ompVersion }}/posh-{{ .chezmoi.os }}-{{ .chezmoi.arch }}{{ if eq .chezmoi.os "windows" }}.exe{{end}}"
 {{ end }}

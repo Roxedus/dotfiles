@@ -19,6 +19,7 @@ integration:
 
 machine:
   controlplane: false
+  work: false
 
 email: me@roxedus.dev
 name: Roxedus

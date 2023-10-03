@@ -1,4 +1,6 @@
 {{ if eq .chezmoi.os "windows" }}
+[System.Environment]::SetEnvironmentVariable('Path',$env:Path + ";{{.chezmoi.homeDir}}\.local\bin",[System.EnvironmentVariableTarget]::Process);
+
 Import-Module PSReadLine
 {{ end -}}
 oh-my-posh init pwsh --config ~/.config/oh-my-posh.yaml | Invoke-Expression

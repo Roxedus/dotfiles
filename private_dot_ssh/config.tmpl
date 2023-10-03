@@ -5,7 +5,9 @@
 {{- if .integration.bitwarden.enabled -}}
 {{ (bitwarden "item" "ssh_config").notes }}
 {{ end -}}
+{{- if not .machine.work -}}
 Host *
     User roxedus
     AddKeysToAgent yes
+{{ end -}}
 {{ end -}}
