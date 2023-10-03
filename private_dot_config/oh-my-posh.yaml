@@ -1,20 +1,45 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
 
 blocks:
-  - alignment: left
-    segments:
+  - segments:
+      - foreground: &r-foreground "#007ACC"
+        template: "{{ .CurrentDate | date .Format }} "
+        properties:
+          time_format: 15:04:05
+        style: plain
+        type: time
+      - foreground: *r-foreground
+        foreground_templates:
+          - '{{if eq "Charging" .State.String}}#40c4ff{{end}}'
+          - '{{if eq "Discharging" .State.String}}#FFFB38{{end}}'
+          - '{{if eq "Full" .State.String}}#33DD2D{{end}}'
+        properties:
+          charged_icon: "\uf240 "
+          charging_icon: "\uf1e6 "
+          discharging_icon: "\ue234 "
+        style: plain
+        template: "{{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}% "
+        type: battery
+      - foreground: *r-foreground
+        style: powerline
+        template: "{{ if .WSL }}WSL at {{ end }}{{.Icon}} "
+        type: os
       - style: plain
-        template: ╭─{{ if .SSHSession }}[]{{ end }}[<#ffff55>{{ .UserName }}</><#ff5555>@</><#55ff55>{{ .HostName }}</>]─
-        type: session
-      - style: plain
-        template: <#ffffff>[</><b>{{ .Name }}</b><#ffffff>]-</>
+        template: "<b>{{ .Name }}</b>"
         type: shell
-        foreground: "#ffff55"
+        foreground: *r-foreground
         properties:
           mapped_shell_names:
             pwsh: "PS"
             bash: "B"
             zsh: "Z"
+    type: rprompt
+    ###
+  - alignment: left
+    segments:
+      - style: plain
+        template: "╭─{{ if .SSHSession }}[\ueba9]-{{ end }}[<#ffff55>{{ .UserName }}</><#ff5555>@</><#55ff55>{{ .HostName }}</>]─"
+        type: session
       - style: plain
         template: <#ffffff>[</>{{ .Path }}<#ffffff>]</>
         type: path
@@ -32,70 +57,28 @@ blocks:
         style: powerline
         template: " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}"
         type: python
-      - background: "#FF9900"
-        foreground: "#000000"
-        powerline_symbol: "\uE0B0"
-        style: powerline
-        template: " \ue7ad {{.Profile}}{{if .Region}}@{{.Region}}{{end}}"
-        type: aws
-      - background: "#008AD7"
-        foreground: "#323130"
-        powerline_symbol: "\uE0B0"
-        style: powerline
-        template: " \uFD03 {{ .User.Name | replace \".onmicrosoft\" \"\" }}{{ if not .IsDefault }}#{{ .Name }}{{ end }}"
-        type: az
-        properties:
-          include_folders:
-            - .*az.*
-      - background: "#844FBA"
-        foreground: "#ffffff"
-        powerline_symbol: "\uE0B0"
-        style: powerline
-        type: terraform
       - background: "#0b59e7"
         foreground: "#000000"
         powerline_symbol: "\uE0B0"
         style: powerline
-        template: ' {{ if ne .Context "default" }} {{ .Context }}{{end}} '
+        template: '{{ if ne .Context "default" }} {{ .Context }}{{end}} '
         type: docker
       - background: "#326ce5"
         foreground: "#ffffff"
         powerline_symbol: "\uE0B0"
         style: powerline
-        template: " {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}}"
+        template: "\uf21a {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
         type: kubectl
         properties:
           include_folders:
             - .*kube.*
             - .*argo.*
-      - background: "#b6131b"
-        foreground: "#ffffff"
-        powerline_symbol: "\uE0B0"
+      - type: terraform
         style: powerline
-        template: " {{ if .WSL }}WSL at {{ end }}{{.Icon}} "
-        type: os
-      - foreground: "#000000"
-        background: "#5c58e0"
-        background_templates:
-          - '{{if eq "Charging" .State.String}}#40c4ff{{end}}'
-          - '{{if eq "Discharging" .State.String}}#FFFB38{{end}}'
-          - '{{if eq "Full" .State.String}}#33DD2D{{end}}'
-        powerline_symbol: "\uE0B0"
-        properties:
-          charged_icon: "\uf240 "
-          charging_icon: "\uf1e6 "
-          discharging_icon: "\ue234 "
-        style: powerline
-        template: "{{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}%"
-        type: battery
-      - background: "#55ffff"
+        powerline_symbol: 
         foreground: "#000000"
-        powerline_symbol: "\uE0B0"
-        properties:
-          time_format: "15:04"
-        style: powerline
-        template: "{{ .CurrentDate | date .Format }}"
-        type: time
+        background: "#5c4ee5"
+        template: "\ue69a {{.WorkspaceName}}"
     type: prompt
   - alignment: left
     newline: true
@@ -103,13 +86,21 @@ blocks:
       - style: plain
         template: ╰─
         type: text
-      - foreground: "#e0f8ff"
+      - style: plain
+        type: executiontime
+        foreground: *r-foreground
+        template: "<#ffffff>[<#fefefe></> {{ .FormattedMs }}<#ffffff>]-"
+        properties:
+          threshold: 500
+          style: austin
+          always_enabled: true
+      - foreground: *r-foreground
         properties:
           branch_icon: " "
           fetch_status: true
           fetch_upstream_icon: true
         style: plain
-        template: <#ffffff>[</>{{ .HEAD }}{{ if .Staging.Changed }}<#00AA00> ● {{ .Staging.String }}</>{{ end }}{{ if .Working.Changed }}<#D75F00> ● {{ .Working.String }}</>{{ end }}<#ffffff>]-</>
+        template: "<#ffffff>[</>{{ .HEAD }} {{ .UpstreamIcon }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}<#D75F00>{{ if .Working.Changed }} \uF044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uF046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \uF692 {{ .StashCount }}{{ end }}<#ffffff>]-</>"
         type: git
       - foreground: "#ecf7fa"
         foreground_templates:
@@ -118,24 +109,61 @@ blocks:
           always_enabled: true
         style: plain
         template: "\ue285 "
-        type: exit
+        type: status
     type: prompt
-console_title_template: "{{.UserName}}@{{.HostName}} {{.Shell}} in {{.PWD}}"
-error_line:
-  background: transparent
-  foreground: "#ffffff"
-  template: "<#eb6f92,#286983> </><#286983,transparent></> "
-osc99: true
+tooltips:
+  - type: az
+    tips:
+      - az
+    template: "\uFD03 {{ .User.Name | replace \".onmicrosoft\" \"\" }}{{ if not .IsDefault }}#{{ .Name }}{{ end }}"
+    foreground: *r-foreground
+    style: plain
+  - type: python
+    tips:
+      - py
+      - python
+      - python3
+    template: " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}"
+    foreground: *r-foreground
+    style: plain
+  - type: docker
+    tips:
+      - docker
+    template: '{{ if ne .Context "default" }} {{ .Context }}{{end}} '
+    foreground: *r-foreground
+    style: plain
+  - type: kubectl
+    tips:
+      - k
+      - kubectl
+    template: "\uf21a {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
+    foreground: *r-foreground
+    style: plain
+  - type: terraform
+    tips:
+      - tf
+      - terraform
+    template: "\ue69a {{.WorkspaceName}}"
+    foreground: *r-foreground
+    style: plain
+
 secondary_prompt:
   background: transparent
   foreground: "#133b55"
-  template: "-> "
+  template: "-\ue285 "
 transient_prompt:
   background: transparent
-  foreground: "#6033df"
-  template: "{{ .Shell }}> "
+  foreground: *r-foreground
+  template: "{{ .Segments.Time.CurrentDate | date \"15:04:05\" }}/{{ .Shell }}>"
+error_line:
+  background: transparent
+  foreground: *r-foreground
+  template: "-<#ff5555> "
 valid_line:
   background: transparent
-  foreground: "#ffffff"
-  template: "<#e0def4,#286983> </><#286983,transparent></> "
+  foreground: *r-foreground
+  template: "-<#55ff55> "
+console_title_template: "{{.UserName}}@{{.HostName}} {{.Shell}} in {{.PWD}}"
+pwd: osc99
+shell_integration: true
 version: 2
