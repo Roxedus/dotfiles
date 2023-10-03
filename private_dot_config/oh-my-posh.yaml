@@ -82,9 +82,9 @@ blocks:
           - '{{if eq "Full" .State.String}}#33DD2D{{end}}'
         powerline_symbol: "\uE0B0"
         properties:
-          charged_icon: " "
-          charging_icon: " "
-          discharging_icon: " "
+          charged_icon: "\uf240 "
+          charging_icon: "\uf1e6 "
+          discharging_icon: "\ue234 "
         style: powerline
         template: "{{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}%"
         type: battery
@@ -117,7 +117,7 @@ blocks:
         properties:
           always_enabled: true
         style: plain
-        template: "ﬀ "
+        template: "\ue285 "
         type: exit
     type: prompt
 console_title_template: "{{.UserName}}@{{.HostName}} {{.Shell}} in {{.PWD}}"

@@ -12,7 +12,7 @@ AppData/
 .bashrc
 .bash_aliases
 run_*.sh
-{{- if .machine.work -}}
+{{- if .machine.work }}
 Documents/ShareX
 {{- end }}
 {{- end }}
