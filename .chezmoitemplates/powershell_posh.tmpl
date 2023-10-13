@@ -12,7 +12,12 @@ Add-Content -Path $PROFILE.CurrentUserAllHosts -Value '$(/opt/homebrew/bin/brew 
 {{ end -}}
 {{ if eq .chezmoi.os "windows" }}
 function Set-Just {
-    just --justfile $HOME/.config/justfile
+    [CmdletBinding()]
+    param (
+        $Param
+    )
+
+    just --justfile $HOME/.config/justfile $Param
 }
 
 Set-Alias -Name j -Value Set-Just
