@@ -35,7 +35,7 @@ $Base = @{
     "WinGetVersion" = "1.6.2771"
 }
 
-$TempFile = $(New-TemporaryFile).FullName
+$TempFile = $(Get-Item ([System.IO.Path]::GetTempFilename())).FullName # https://github.com/PowerShell/PowerShell/issues/14100#issuecomment-1236428024
 
 Set-Content -Path $TempFile -Value $($Base | ConvertTo-Json -Depth 6)
 
