@@ -1,16 +1,18 @@
 {{- if eq .chezmoi.os "windows" -}}
 $Packages = @(
-    "Bitwarden.CLI"
-    "Casey.Just"
     "Git.Git"
-    "Hashicorp.Terraform"
-    "Microsoft.AzureCLI"
     "Microsoft.PowerToys"
     "Microsoft.VisualStudioCode.Insiders"
     "Microsoft.WindowsTerminal"
+{{- if .machine.work }}
+    "Bitwarden.CLI"
+    "Casey.Just"
+    "Hashicorp.Terraform"
+    "Microsoft.AzureCLI"
     "Mozilla.Firefox"
     "Python.Python.3.11"
     "Terraform-docs.Terraform-docs"
+{{- end }}
 )
 
 $Base = @{
