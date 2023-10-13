@@ -1,6 +1,7 @@
 alias tester="docker run --rm -t --name=test --tmpfs /config:exec -e TZ=${TZ} -e PUID=$(id -u) -e PGID=$(id -g)"
 alias texec="docker exec -it test /bin/bash"
 alias dive="docker run --rm -it --name=dive -v /var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest"
+alias j="just --justfile $HOME/.config/justfile"
 alias sudo="sudo "
 
 alias sync="docker pull lscr.io/linuxserver/jenkins-builder\:latest && docker run --rm \

@@ -1,0 +1,9 @@
+{{ if eq .chezmoi.os "windows" }}
+set shell := ["powershell.exe", "-c"]
+{{ end}}
+
+default:
+  just --list
+
+git-adapt:
+  pre-commit install
