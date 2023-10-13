@@ -1,0 +1,45 @@
+{{- if eq .chezmoi.os "windows" -}}
+$Packages = @(
+    "Bitwarden.CLI"
+    "Casey.Just"
+    "Git.Git"
+    "Hashicorp.Terraform"
+    "Microsoft.AzureCLI"
+    "Microsoft.PowerToys"
+    "Microsoft.VisualStudioCode.Insiders"
+    "Microsoft.WindowsTerminal"
+    "Mozilla.Firefox"
+    "Python.Python.3.11"
+    "Terraform-docs.Terraform-docs"
+)
+
+$Base = @{
+    '$schema'       = "https://aka.ms/winget-packages.schema.2.0.json"
+    "Sources"       = @(
+        @{
+            "Packages"      = @(
+                foreach ($Package in $Packages) {
+                    @{
+                        PackageIdentifier = $Package
+                    }
+                }
+            )
+            "SourceDetails" = @{
+                "Argument"   = "https://cdn.winget.microsoft.com/cache"
+                "Identifier" = "Microsoft.Winget.Source_8wekyb3d8bbwe"
+                "Name"       = "winget"
+                "Type"       = "Microsoft.PreIndexed.Package"
+            }
+        }
+    )
+    "WinGetVersion" = "1.6.2771"
+}
+
+$TempFile = $(New-TemporaryFile).FullName
+
+Set-Content -Path $TempFile -Value $($Base | ConvertTo-Json -Depth 6)
+
+winget import --accept-package-agreements --accept-source-agreements -i $TempFile
+
+Remove-Item -Path $TempFile -Force
+{{ end -}}
