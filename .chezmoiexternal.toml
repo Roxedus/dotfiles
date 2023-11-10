@@ -6,6 +6,15 @@
     path = "fzf"
     url = "https://github.com/junegunn/fzf/releases/download/{{ $fzfVersion }}/fzf-{{ $fzfVersion }}-{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
     refreshPeriod = "168h"
+{{ if .integration.zsh.antidote -}}
+["{{ joinPath .paths.XDG_DATA_HOME "antidote" }}"]
+    type = "archive"
+    url = "https://github.com/mattmc3/antidote/archive/master.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+{{ end }}
+{{- if .integration.zsh.omz -}}
 [".oh-my-zsh"]
     type = "archive"
     url = "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"

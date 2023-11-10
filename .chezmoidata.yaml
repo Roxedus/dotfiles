@@ -16,6 +16,8 @@ integration:
     version: latest
   zsh:
     enabled: true
+    antidote: false
+    omz: true
 
 machine:
   controlplane: false
