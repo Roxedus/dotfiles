@@ -24,6 +24,13 @@ machine:
 email: me@roxedus.dev
 name: Roxedus
 
+paths:
+  XDG_CACHE_HOME: ".cache"
+  XDG_CONFIG_HOME: ".config"
+  XDG_DATA_HOME: ".local/share"
+  XDG_STATE_HOME: ".local/state"
+  ZDOTDIR: ".config/zsh"
+
 git:
   sign: true
   format: ssh

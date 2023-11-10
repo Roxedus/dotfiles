@@ -1,7 +1,7 @@
 {{- if ne .chezmoi.os "windows" -}}
 #!/bin/bash
 
-{{ template "xdg_env.tmpl" dict "shell" "bash" }}
+{{ template "xdg_env.tmpl" dict "shell" "bash" "paths" .paths }}
 
 mkdir -p \
     "${XDG_DATA_HOME}" \

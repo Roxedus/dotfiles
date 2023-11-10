@@ -1,5 +1,5 @@
 {{- if .integration.zsh.enabled -}}
-{{ template "xdg_env.tmpl" dict "shell" "zsh" }}
+{{ template "xdg_env.tmpl" dict "shell" "zsh" "paths" .paths }}
 {{ if lookPath "brew" -}}
 {{ template "brew_env.tmpl" dict "shell" "zsh" "os" .chezmoi.os }}
 {{- end }}

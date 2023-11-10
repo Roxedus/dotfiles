@@ -3,8 +3,7 @@
 source /etc/skel/.bashrc
 {{ end }}
 
-{{- template "xdg_env.tmpl" dict "shell" "bash" -}}
-
+{{- template "xdg_env.tmpl" dict "shell" "bash" "paths" .paths }}
 ####
 {{ if lookPath "brew" }}
 {{- template "brew_env.tmpl" dict "shell" "bash" "os" .chezmoi.os -}}

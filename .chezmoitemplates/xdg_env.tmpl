@@ -1,16 +1,16 @@
 # Set XDG locations
-export XDG_DATA_HOME="${HOME}/.local/share"
-export XDG_CONFIG_HOME="${HOME}/.config"
-export XDG_STATE_HOME="${HOME}/.local/state"
-export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_DATA_HOME="${HOME}/{{ .paths.XDG_DATA_HOME }}"
+export XDG_CONFIG_HOME="${HOME}/{{ .paths.XDG_CONFIG_HOME }}"
+export XDG_STATE_HOME="${HOME}/{{ .paths.XDG_STATE_HOME }}"
+export XDG_CACHE_HOME="${HOME}/{{ .paths.XDG_CACHE_HOME }}"
 
 # Set app variables
 export AWS_SHARED_CREDENTIALS_FILE="${XDG_CONFIG_HOME}/aws/credentials"
 export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"
 export LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 
+# Set Shell dependent variables
 {{- if eq .shell "bash" }}
 HISTFILE="${XDG_STATE_HOME}/bash/history"
 {{- else if eq .shell "zsh" }}
-HISTFILE="$ZDOTDIR/.zhistory"
 {{- end }}
