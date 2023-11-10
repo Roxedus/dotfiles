@@ -1,5 +1,11 @@
 {{ if ne .chezmoi.os "windows" }}
-{{- if .integration.zsh.enabled -}}
+{{- $fzfVersion := (gitHubLatestRelease "junegunn/fzf").TagName -}}
+[".local/bin/fzf"]
+    type = "archive-file"
+    executable = true
+    path = "fzf"
+    url = "https://github.com/junegunn/fzf/releases/download/{{ $fzfVersion }}/fzf-{{ $fzfVersion }}-{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
+    refreshPeriod = "168h"
 [".oh-my-zsh"]
     type = "archive"
     url = "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
