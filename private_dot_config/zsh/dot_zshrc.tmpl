@@ -86,7 +86,16 @@ fpath=($HOME/.zsh/completion $fpath)
 (( $+_comps[chezmoi] )) && source <(chezmoi completion zsh)
 (( $+_comps[hishtory] )) && source <(hishtory completion zsh)
 
-(( $+commands[bat] )) && alias cat=bat && alias rcat=/bin/cat
+(( $+commands[bat] )) && \
+    export BAT_THEME="DarkNeon" && \
+    export MANPAGER="sh -c 'col -bx | bat -l man -p'" && \
+    alias -g -- --help='--help 2>&1 | bat --language=help --style=plain' && \
+    alias -g -- -h='-h 2>&1 | bat --language=help --style=plain' && \
+    alias cat="bat --paging=never" && \
+    alias rcat="command cat"
+
+
+(( $+_comps[fzf] )) && source "${HOMEBREW_PREFIX}/opt/fzf/shell/completion.zsh"
 
 {{ if .integration.bitwarden.enabled -}}
 (( $+_comps[bw] )) && eval "$(bw completion --shell zsh); compdef _bw bw;"
