@@ -22,6 +22,7 @@ integration:
 machine:
   controlplane: false
   work: false
+  wslName:
 
 email: me@roxedus.dev
 name: Roxedus

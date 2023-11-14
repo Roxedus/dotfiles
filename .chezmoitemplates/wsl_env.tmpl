@@ -3,6 +3,6 @@
 export FIGNORE=".dll:.DLL:.exe:.EXE"
 export PATH="$PATH:/mnt/c/Program Files/Oracle/VirtualBox"
 export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
-export VAGRANT_WSL_WINDOWS_ACCESS_USER=Roxedus
+export VAGRANT_WSL_WINDOWS_ACCESS_USER={{ default .chezmoi.username .machine.wslName }}
 {{- end -}}
 {{- end -}}
