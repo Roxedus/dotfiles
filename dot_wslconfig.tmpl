@@ -1,20 +1,4 @@
-{{- if eq .chezmoi.os "linux" }}
-{{- if (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
-[automount]
-enabled = true
-root = /mnt/
-options = "metadata,uid=1000,gid=1000,umask=022,fmask=11"
-mountFsTab = true
-
-[network]
-generateHosts = true
-generateResolvConf = false
-
-[boot]
-systemd=true
-
-[interop]
-enabled = true
-appendWindowsPath = true
-{{- end }}
-{{ end }}
+{{- if eq .chezmoi.os "windows" -}}
+[wsl2]
+memory={{ div (div ((output "wmic" "computersystem" "get" "totalphysicalmemory" "/Value" | trim | split "=")._1 | int ) 2 ) 1024 }}MB
+{{ end -}}
