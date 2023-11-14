@@ -1,0 +1,17 @@
+{{- if eq .chezmoi.os "linux" }}
+{{- if (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
+#!/bin/bash
+if [ ! -d "/mnt/c/Users/{{ default .chezmoi.username .machine.wslName }}/.ssh" ];then
+    echo "Could not find a SSH directory in  /mnt/c/Users/{{ default .chezmoi.username .machine.wslName }}"
+else
+    if [ ! -L "/home/{{ .chezmoi.username }}/.ssh" ] && [ -d "/mnt/c/Users/{{ default .chezmoi.username .machine.wslName }}/.ssh" ];then
+        ln -s /mnt/c/Users/{{ default .chezmoi.username .machine.wslName }}/.ssh/config ~/.ssh/
+    fi
+    if [ -L "/home/{{ .chezmoi.username }}/.ssh" ] && [ -d "/mnt/c/Users/{{ default .chezmoi.username .machine.wslName }}/.ssh" ];then
+        chmod 600 ~/.ssh/*
+        chmod 700 ~/.ssh
+        chmod 644 ~/.ssh/*.pub
+    fi
+fi
+{{- end }}
+{{ end }}
