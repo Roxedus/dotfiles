@@ -1,9 +1,10 @@
-linnnus/autovenv
 olets/zsh-abbr
 reegnz/jq-zsh-plugin
 zdharma-continuum/fast-syntax-highlighting kind:defer
 zsh-users/zsh-completions path:src kind:fpath
 junegunn/fzf path:shell/completion.zsh kind:fpath
+
+$ZDOTDIR/plugins/autovenv
 
 ohmyzsh/ohmyzsh path:plugins/command-not-found
 ohmyzsh/ohmyzsh path:plugins/ssh-agent
