@@ -1,0 +1,13 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- $script := `
+if [[ -z $TMUX ]] && [[ -n $SSH_TTY ]] && [[ -n "$LC_tmux_session" ]] && [[ $- =~ i ]]; then
+  session="${LC_tmux_session:-ssh}"
+  unset LC_tmux_session
+
+  if tmux has-session -t "$session" 2>/dev/null; then
+    exec tmux attach-session -t "$session"
+  else
+    exec tmux new-session -s "$session"
+  fi
+fi` -}}
+{{- .chezmoi.stdin | replaceAllRegex "\n\n# if running bash" (cat "\n" $script "\n# if running bash") -}}

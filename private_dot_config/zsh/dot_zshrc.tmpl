@@ -79,6 +79,7 @@ VSCODE=code-insiders
 {{ end -}}
 
 export PATH="$PATH:$HOME/.local/bin"
+export LC_tmux_session=remote
 
 {{ if .integration.hishtory.enabled -}}
 {{ template "hishtory_env.tmpl" . -}}

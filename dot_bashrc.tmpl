@@ -11,6 +11,7 @@ source /etc/skel/.bashrc
 
 export EDITOR=nano
 export PATH="$PATH:$HOME/.local/bin"
+export LC_tmux_session=remote
 
 {{ template "wsl_env.tmpl" . }}
 
