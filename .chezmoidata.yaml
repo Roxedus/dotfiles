@@ -18,6 +18,8 @@ integration:
     enabled: true
     antidote: false
     omz: true
+  tmux:
+    enhanced: false
 
 machine:
   controlplane: false

@@ -6,6 +6,14 @@
     path = "fzf"
     url = "https://github.com/junegunn/fzf/releases/download/{{ $fzfVersion }}/fzf-{{ $fzfVersion }}-{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
     refreshPeriod = "168h"
+{{ if .integration.tmux.enhanced -}}
+["{{ joinPath .paths.XDG_CONFIG_HOME "tmux/plugins/tpm" }}"]
+    type = "archive"
+    url = "https://github.com/tmux-plugins/tpm/archive/master.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+{{ end }}
 {{ if .integration.zsh.antidote -}}
 ["{{ joinPath .paths.XDG_DATA_HOME "antidote" }}"]
     type = "archive"
