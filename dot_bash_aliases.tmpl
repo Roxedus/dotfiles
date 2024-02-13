@@ -11,7 +11,7 @@ alias sync="docker pull lscr.io/linuxserver/jenkins-builder\:latest && docker ru
   lscr.io/linuxserver/jenkins-builder\:latest && \
   rm -rf .jenkins-external"
 
-alias test_sync="docker pull jenkins-builder:latest && docker run --rm \
+alias test_sync="docker run --rm \
   -v $(pwd):/tmp \
   -e LOCAL=true \
   -e PUID=$(id -u) -e PGID=$(id -g) \
