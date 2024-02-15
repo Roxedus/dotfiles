@@ -11,7 +11,7 @@ mountFsTab = true
 
 [network]
 generateHosts = true
-generateResolvConf = false
+generateResolvConf = {{ .machine.work }}
 
 [boot]
 systemd=true

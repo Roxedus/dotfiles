@@ -7,8 +7,22 @@ oh-my-posh init pwsh --config ~/.config/oh-my-posh.yaml | Invoke-Expression
 
 Enable-PoshTransientPrompt
 Enable-PoshLineError
+
+if ($PSVersionTable.PSVersion.Major -ge 7) {
+  Set-PSReadLineOption -PredictionSource History
+}
+
 {{ if eq .chezmoi.os "darwin" -}}
 Add-Content -Path $PROFILE.CurrentUserAllHosts -Value '$(/opt/homebrew/bin/brew shellenv) | Invoke-Expression'
+{{ end -}}
+{{ if .integration.bitwarden.enabled -}}
+function Get-BW-SESSION {
+  if (-Not (Test-Path -Path "env:BW_SESSION")) {
+    $env:BW_SESSION = (bw unlock --raw)
+  }
+}
+
+Set-Alias -Name bwopen -Value Get-BW-SESSION
 {{ end -}}
 {{ if eq .chezmoi.os "windows" }}
 function Set-Just {
