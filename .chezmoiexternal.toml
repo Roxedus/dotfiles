@@ -77,6 +77,17 @@
     url = "https://github.com/bitwarden/clients/releases/download/cli-v{{ .integration.bitwarden.version }}/bw-{{ .chezmoi.os -}}-{{ .integration.bitwarden.version }}.zip"
 {{ end }}
 {{ end }}
+{{ if .integration.podman.managed -}}
+{{ $podmanVersion := .integration.podman.version -}}
+{{- if eq .integration.podman.version "latest" }}
+{{ $podmanVersion = (gitHubLatestRelease "containers/podman").TagName -}}
+{{ end }}
+[".local/bin/podman"]
+    type = "archive-file"
+    executable = true
+    path = "bin/podman-remote-static-{{ .chezmoi.os }}_{{ .chezmoi.arch }}"
+    url = "https://github.com/containers/podman/releases/download/{{ $podmanVersion }}/podman-remote-static-{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
+{{ end }}
 {{ end }}
 {{ if .integration.oh_my_posh.managed -}}
 {{ $ompVersion := nospace (cat "v" .integration.oh_my_posh.version) -}}

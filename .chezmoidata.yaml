@@ -20,6 +20,10 @@ integration:
     omz: true
   tmux:
     enhanced: false
+  podman:
+    enabled: false
+    managed: false
+    version: latest
 
 machine:
   controlplane: false
