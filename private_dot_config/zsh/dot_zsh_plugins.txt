@@ -1,4 +1,5 @@
 olets/zsh-abbr
+olets/zsh-window-title
 reegnz/jq-zsh-plugin
 zdharma-continuum/fast-syntax-highlighting kind:defer
 zsh-users/zsh-completions path:src kind:fpath

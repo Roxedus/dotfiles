@@ -1,6 +1,9 @@
 # Enable mouse control (clickable windows, panes, resizable panes)
 set -g mouse on
 
+set-option -g set-titles on
+set-option -g set-titles-string "#{pane_title}"
+
 # reload config file (change file location to your the tmux.conf you want to use)
 bind r source-file {{ joinPath .chezmoi.homeDir .paths.XDG_CONFIG_HOME "tmux/tmux.conf" }}
 

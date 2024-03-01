@@ -163,7 +163,7 @@ valid_line:
   background: transparent
   foreground: *r-foreground
   template: "-<#55ff55> "
-console_title_template: "{{.UserName}}@{{.HostName}} {{.Shell}} in {{.PWD}}"
+#console_title_template: "{{.UserName}}@{{.HostName}} {{.Shell}} in {{.PWD}}"
 pwd: osc99
 shell_integration: true
 version: 2
