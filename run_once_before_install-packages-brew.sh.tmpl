@@ -2,9 +2,10 @@
 #!/bin/bash
 
 brew bundle --no-lock --file=/dev/stdin <<EOF
-brew "gcc"
 brew "age"
 brew "bat"
+brew "gcc"
+brew "just"
 {{ if and (not .integration.bitwarden.managed) .integration.bitwarden.enabled -}}
 brew "bitwarden-cli"
 {{ end -}}
