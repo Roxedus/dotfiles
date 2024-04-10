@@ -14,9 +14,6 @@ zstyle :omz:plugins:ssh-agent agent-forwarding on
 zstyle :omz:plugins:ssh-agent lazy yes
 zstyle :omz:update mode disabled
 
-autoload -U +X bashcompinit && bashcompinit
-autoload -Uz +X compinit && compinit
-
 {{ if .integration.zsh.omz -}}
 export ZSH=$HOME/.oh-my-zsh
 
@@ -91,6 +88,9 @@ source $HOME/$HISHTORY_PATH/config.zsh
 {{ end -}}
 
 {{ template "wsl_env.tmpl" . }}
+
+autoload -U +X bashcompinit && bashcompinit
+autoload -Uz +X compinit && compinit
 
 (( $+_comps[hishtory] )) && source <(hishtory completion zsh)
 (( $+_comps[oh-my-posh] )) && eval <(oh-my-posh completion zsh)
