@@ -6,7 +6,9 @@ reegnz/jq-zsh-plugin
 zdharma-continuum/fast-syntax-highlighting kind:defer
 zsh-users/zsh-completions path:src kind:fpath
 junegunn/fzf path:shell/completion.zsh kind:fpath
-
+{{ if lookPath "terraform" }}
+macunha1/zsh-terraform kind:fpath
+{{ end }}
 $ZDOTDIR/plugins/autovenv
 
 ohmyzsh/ohmyzsh path:plugins/command-not-found
