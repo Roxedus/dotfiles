@@ -1,4 +1,4 @@
-{{- if eq .chezmoi.os "linux" -}}
+{{- if (and (eq .chezmoi.os "linux") (not .codespaces)) -}}
 {{- if (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
 export FIGNORE=".dll:.DLL:.exe:.EXE"
 {{- if not .machine.work }}
