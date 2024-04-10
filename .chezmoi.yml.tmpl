@@ -1,0 +1,17 @@
+{{- $codespaces:= env "REMOTE_CONTAINERS" | not | not -}}
+sourceDir: {{ .chezmoi.sourceDir | quote }}
+
+data:
+    codespaces: {{ $codespaces }}
+{{- if $codespaces }}
+    integration:
+        hishtory:
+            enabled: false
+        bitwarden:
+            managed: true
+        zsh:
+            antidote: true
+{{- else }}
+    git:
+        sign: {{ promptBoolOnce . "git.sign" "Sign Git Commits"}}
+{{- end }}

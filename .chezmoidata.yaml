@@ -25,6 +25,7 @@ integration:
     managed: false
     version: latest
 
+codespaces: false
 machine:
   controlplane: false
   work: false

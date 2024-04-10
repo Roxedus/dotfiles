@@ -1,3 +1,4 @@
+{{- if not .codespaces -}}
 [user]
 	email = {{ .email | quote }}
 	name = {{ .name | quote }}
@@ -25,3 +26,4 @@
 {{- if .git.store }}
 	credentialStore = {{ .git.store }}
 {{ end }}
+{{- end -}}
