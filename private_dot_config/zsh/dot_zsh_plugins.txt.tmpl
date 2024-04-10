@@ -10,7 +10,7 @@ junegunn/fzf path:shell/completion.zsh kind:fpath
 $ZDOTDIR/plugins/autovenv
 
 ohmyzsh/ohmyzsh path:plugins/command-not-found
-{{- if not .codespaces -}}
+{{ if not .codespaces -}}
 ohmyzsh/ohmyzsh path:plugins/ssh-agent
 {{- end -}}
 
