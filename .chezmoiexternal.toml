@@ -48,15 +48,17 @@
     refreshPeriod = "168h"
 {{ end }}
 {{ end }}
-{{ if .integration.hishtory.managed -}}
+{{ if .integration.hishtory.enabled -}}
 {{ $hishVersion := .integration.hishtory.version -}}
 {{- if eq .integration.hishtory.version "latest" }}
 {{ $hishVersion = (gitHubLatestRelease "ddworken/hishtory").TagName -}}
 {{ end }}
+{{ if .integration.hishtory.managed -}}
 [".config/hishtory/hishtory"]
     type = "file"
     executable = true
     url = "https://github.com/ddworken/hishtory/releases/download/v{{ $hishVersion }}/hishtory-{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
+{{ end }}
 [".config/hishtory/config.zsh"]
     type = "file"
     executable = true

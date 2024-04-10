@@ -11,6 +11,7 @@ data:
             managed: true
         zsh:
             antidote: true
+            omz: false
 {{- else }}
     git:
         sign: {{ promptBoolOnce . "git.sign" "Sign Git Commits"}}
