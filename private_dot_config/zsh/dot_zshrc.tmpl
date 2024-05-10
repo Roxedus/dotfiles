@@ -92,6 +92,7 @@ source $HOME/$HISHTORY_PATH/config.zsh
 autoload -U +X bashcompinit && bashcompinit
 autoload -Uz +X compinit && compinit
 
+(( $+_comps[chezmoi] )) && source <(chezmoi completion zsh)
 (( $+_comps[hishtory] )) && source <(hishtory completion zsh)
 (( $+_comps[oh-my-posh] )) && eval <(oh-my-posh completion zsh)
 
