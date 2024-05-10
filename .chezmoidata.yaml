@@ -20,6 +20,10 @@ integration:
     omz: true
   tmux:
     enhanced: false
+  kubernetes:
+    enabled: false
+    managed: false
+    version: "1.29.2"
   podman:
     enabled: false
     managed: false
@@ -27,7 +31,7 @@ integration:
 
 codespaces: false
 machine:
-  controlplane: false
+  iac: false
   work: false
   wslName:
 

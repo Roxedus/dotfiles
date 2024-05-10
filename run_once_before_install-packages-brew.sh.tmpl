@@ -17,11 +17,17 @@ brew "jq"
 brew "pygments"
 brew "syft"
 brew "yq"
-{{ if .machine.controlplane -}}
-brew "argocd"
-brew "azure-cli"
+{{ if and (not .integration.kubernetes.managed) .integration.kubernetes.enabled -}}
 brew "helm"
 brew "k9s"
+brew "krew
+brew "kubecolor"
+brew "kubernetes-cli@{{ .integration.kubernetes.version }}"
+tap "fluxcd/tap/flux"
+tap "siderolabs/tap/talosctl"
+{{ end -}}
+{{ if .machine.iac -}}
+brew "azure-cli"
 brew "sops"
 brew "terraform"
 brew "terragrunt"
