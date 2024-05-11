@@ -1,6 +1,8 @@
 {{- if lookPath "brew" -}}
 #!/bin/bash
 
+export HOMEBREW_NO_ENV_HINTS=1
+
 brew bundle --no-lock --file=/dev/stdin <<EOF
 brew "age"
 brew "bat"
@@ -20,7 +22,7 @@ brew "yq"
 {{ if and (not .integration.kubernetes.managed) .integration.kubernetes.enabled -}}
 brew "helm"
 brew "k9s"
-brew "krew
+brew "krew"
 brew "kubecolor"
 brew "kubernetes-cli@{{ .integration.kubernetes.version }}"
 tap "fluxcd/tap/flux"
@@ -45,4 +47,7 @@ cask "powershell"
 cask "vagrant"
 {{ end -}}
 EOF
+
+brew completions link
+
 {{ end -}}
