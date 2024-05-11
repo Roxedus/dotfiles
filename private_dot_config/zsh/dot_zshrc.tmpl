@@ -66,8 +66,6 @@ autoload -U add-zsh-hook
 
 zstyle :autovenv ignored /home/roxedus/projects/home-infra/ansible/.venv
 
-antidote load
-
 {{ end -}}
 
 {{ if eq .chezmoi.os "linux" -}}
@@ -93,8 +91,9 @@ autoload -U +X bashcompinit && bashcompinit
 autoload -Uz +X compinit && compinit
 
 (( $+_comps[chezmoi] )) && source <(chezmoi completion zsh)
+(( $+commands[docker] )) && source <(docker completion zsh)
 (( $+_comps[hishtory] )) && source <(hishtory completion zsh)
-(( $+_comps[oh-my-posh] )) && eval <(oh-my-posh completion zsh)
+(( $+_comps[oh-my-posh] )) && source <(oh-my-posh completion zsh)
 
 (( $+commands[bat] )) && \
     export BAT_THEME="DarkNeon" && \
@@ -117,4 +116,8 @@ fi
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
     eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh.yaml)"
 fi
+
+{{ if .integration.zsh.antidote -}}
+antidote load
+{{ end -}}
 {{ end -}}
