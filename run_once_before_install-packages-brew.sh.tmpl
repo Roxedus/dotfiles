@@ -20,13 +20,13 @@ brew "pygments"
 brew "syft"
 brew "yq"
 {{ if and (not .integration.kubernetes.managed) .integration.kubernetes.enabled -}}
+brew "fluxcd/tap/flux"
 brew "helm"
 brew "k9s"
 brew "krew"
 brew "kubecolor"
-brew "kubernetes-cli@{{ .integration.kubernetes.version }}"
-tap "fluxcd/tap/flux"
-tap "siderolabs/tap/talosctl"
+brew "kubernetes-cli"
+brew "siderolabs/tap/talosctl"
 {{ end -}}
 {{ if .machine.iac -}}
 brew "azure-cli"
