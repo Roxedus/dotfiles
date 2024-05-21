@@ -3,6 +3,16 @@
 
 Import-Module PSReadLine
 {{ end -}}
+
+if ($env:TERM_PROGRAM -eq "vscode") {
+  if ($env:TERM_PROGRAM_VERSION -match "-insider") {
+    . "$(code-insiders --locate-shell-integration-path pwsh)"
+  }
+  else {
+    . "$(code --locate-shell-integration-path pwsh)"
+  }
+}
+
 oh-my-posh init pwsh --config ~/.config/oh-my-posh.yaml | Invoke-Expression
 
 Enable-PoshTransientPrompt
