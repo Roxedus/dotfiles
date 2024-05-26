@@ -1,4 +1,17 @@
+codespaces: false
+
+git:
+  sign: true
+  format: ssh
+  key: ""
+  helper: cache
+  store:
+
 integration:
+  bitwarden:
+    enabled: true
+    managed: false
+    version: "2023.5.0"
   hishtory:
     enabled: true
     managed: true
@@ -6,37 +19,29 @@ integration:
     offline: true
     settings:
       server: http://10.0.0.30:5453
-  bitwarden:
-    enabled: true
-    managed: false
-    version: "2023.5.0"
-  oh_my_posh:
-    enabled: true
-    managed: true
-    version: latest
-  zsh:
-    enabled: true
-    antidote: false
-    omz: true
-  tmux:
-    enhanced: false
   kubernetes:
     enabled: false
     managed: false
     version: "1.29.2"
+  oh_my_posh:
+    enabled: true
+    managed: true
+    version: latest
   podman:
     enabled: false
     managed: false
     version: latest
+  tmux:
+    enhanced: false
+  zsh:
+    enabled: true
+    antidote: false
+    omz: true
 
-codespaces: false
 machine:
   iac: false
   work: false
   wslName:
-
-email: me@roxedus.dev
-name: Roxedus
 
 paths:
   XDG_CACHE_HOME: ".cache"
@@ -45,9 +50,6 @@ paths:
   XDG_STATE_HOME: ".local/state"
   ZDOTDIR: ".config/zsh"
 
-git:
-  sign: true
-  format: ssh
-  key: ""
-  helper: cache
-  store:
+user:
+  email: me@roxedus.dev
+  name: Roxedus

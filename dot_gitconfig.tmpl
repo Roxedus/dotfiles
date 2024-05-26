@@ -1,7 +1,7 @@
 {{- if not .codespaces -}}
 [user]
-	email = {{ .email | quote }}
-	name = {{ .name | quote }}
+	email = {{ .user.email | quote }}
+	name = {{ .user.name | quote }}
 {{ if .git.sign }}
 	signingKey = {{ .git.key | quote }}
 [commit]
