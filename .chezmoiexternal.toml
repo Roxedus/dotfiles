@@ -84,7 +84,7 @@
     url = "https://raw.githubusercontent.com/ddworken/hishtory/{{ $hishVersion }}/client/lib/config.sh"
 {{ end }}
 {{ if .integration.bitwarden.managed -}}
-[".local/bin"]
+[".local/wrapped"]
     type = "archive"
     executable = true
     include = ["bw"]

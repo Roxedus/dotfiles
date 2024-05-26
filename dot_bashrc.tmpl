@@ -11,13 +11,13 @@ source /etc/skel/.bashrc
 {{ end }}
 
 export EDITOR=nano
-export PATH="$PATH:$HOME/.local/bin"
+export PATH="$HOME/.local/bin:$HOME/.local/wrapped:$PATH"
 export LC_tmux_session=remote
 
 {{ template "wsl_env.tmpl" . }}
 
 {{ if .integration.hishtory.enabled -}}
-{{ template "hishtory_env.tmpl" . -}}
+source ${XDG_CONFIG_HOME}/hishtory/config.sh
 
 {{ end -}}
 

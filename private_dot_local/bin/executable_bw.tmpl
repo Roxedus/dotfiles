@@ -1,0 +1,9 @@
+{{ if .integration.bitwarden.enabled -}}
+#!/bin/bash
+
+export PATH="${PATH//$HOME\/.local\/bin:/}"
+
+#exit 1
+# Run Bitwarden CLI with no deprecation warnings
+NODE_OPTIONS="--no-deprecation" bw "$@"
+{{ end -}}
