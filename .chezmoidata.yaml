@@ -12,6 +12,10 @@ integration:
     enabled: true
     managed: false
     version: "2023.5.0"
+  eza:
+    enabled: true
+    managed: false
+    version: latest
   hishtory:
     enabled: true
     managed: true

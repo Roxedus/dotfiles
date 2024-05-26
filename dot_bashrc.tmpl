@@ -21,5 +21,9 @@ export LC_tmux_session=remote
 
 {{ end -}}
 
+{{ if .integration.eza.enabled -}}
+unalias l
+{{ end -}}
+
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh.yaml)"
 {{ end -}}

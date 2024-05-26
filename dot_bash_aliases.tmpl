@@ -16,3 +16,7 @@ alias test_sync="docker run --rm \
   -e LOCAL=true \
   -e PUID=$(id -u) -e PGID=$(id -g) \
   jenkins-builder:latest"
+
+{{ if .integration.eza.enabled -}}
+alias ls='eza --git -hl --icons'
+{{ end }}

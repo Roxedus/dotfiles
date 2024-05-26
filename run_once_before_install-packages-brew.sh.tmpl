@@ -13,6 +13,9 @@ brew "bitwarden-cli"
 {{ end -}}
 brew "bpython"
 brew "chroma"
+{{ if and (not .integration.eza.managed) .integration.eza.enabled -}}
+brew "eza"
+{{ end -}}
 brew "git"
 brew "jnv"
 brew "jq"

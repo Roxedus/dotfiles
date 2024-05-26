@@ -49,6 +49,20 @@
     refreshPeriod = "168h"
 {{ end }}
 {{ end }}
+{{ if .integration.eza.enabled -}}
+{{ $ezaVersion := .integration.eza.version -}}
+{{- if eq .integration.eza.version "latest" }}
+{{ $ezaVersion = (gitHubLatestRelease "eza-community/eza").TagName -}}
+{{ end }}
+{{ $ezaArches := dict "amd64" "x86_64" "arm64" "aarch64" -}}
+{{ if .integration.eza.managed -}}
+[".local/bin/eza"]
+    type = "archive-file"
+    executable = true
+    path = "./eza"
+    url = "https://github.com/eza-community/eza/releases/download/{{ $ezaVersion }}/eza_{{ get $ezaArches .chezmoi.arch }}-unknown-linux-gnu.tar.gz"
+{{ end }}
+{{ end }}
 {{ if .integration.hishtory.enabled -}}
 {{ $hishVersion := .integration.hishtory.version -}}
 {{- if eq .integration.hishtory.version "latest" }}
