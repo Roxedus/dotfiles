@@ -1,12 +1,13 @@
 {{- if ne .chezmoi.os "windows" -}}
+{{ $bogus := (. | setValueAtPath "custom.shell" "bash") -}}
 {{ if (and (eq .chezmoi.os "linux") (not .codespaces)) -}}
 source /etc/skel/.bashrc
 {{ end }}
 
-{{- template "xdg_env.tmpl" dict "shell" "bash" "paths" .paths }}
+{{- template "xdg_env.tmpl" . }}
 ####
 {{ if lookPath "brew" }}
-{{- template "brew_env.tmpl" dict "shell" "bash" "os" .chezmoi.os -}}
+{{- template "brew_env.tmpl" . -}}
 {{ end }}
 
 export EDITOR=nano
@@ -17,7 +18,6 @@ export LC_tmux_session=remote
 
 {{ if .integration.hishtory.enabled -}}
 {{ template "hishtory_env.tmpl" . -}}
-source $HOME/$HISHTORY_PATH/config.sh
 
 {{ end -}}
 

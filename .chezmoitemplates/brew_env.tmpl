@@ -1,10 +1,10 @@
-{{- if eq .os "linux" -}}
+{{- if eq .chezmoi.os "linux" -}}
 HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
-{{- else if eq .os "darwin" -}}
+{{- else if eq .chezmoi.os "darwin" -}}
 HOMEBREW_PREFIX="/opt/homebrew"
 {{- end }}
 eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
-{{ if eq .shell "bash" }}
+{{ if eq .custom.shell "bash" }}
 if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]
 then
   source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
@@ -14,6 +14,6 @@ else
     [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
   done
 fi
-{{ else if eq .shell "zsh" }}
+{{ else if eq .custom.shell "zsh" }}
 fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
 {{- end -}}

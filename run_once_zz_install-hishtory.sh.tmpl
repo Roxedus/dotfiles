@@ -1,5 +1,6 @@
 {{- if ne .chezmoi.os "windows" -}}
 {{- if .integration.hishtory.enabled -}}
+{{ $bogus := (. | setValueAtPath "custom.shell" "bash") -}}
 #!/bin/bash
 
 set -o pipefail

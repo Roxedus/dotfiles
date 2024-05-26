@@ -1,7 +1,8 @@
 {{- if .integration.zsh.enabled -}}
-{{ template "xdg_env.tmpl" dict "shell" "zsh" "paths" .paths }}
+{{ $bogus := (. | setValueAtPath "custom.shell" "zsh") -}}
+{{ template "xdg_env.tmpl" . }}
 {{- if lookPath "brew" }}
-{{ template "brew_env.tmpl" dict "shell" "zsh" "os" .chezmoi.os }}
+{{ template "brew_env.tmpl" . }}
 {{- end }}
 
 (( $+commands[vim] )) && export EDITOR=vim || export EDITOR=nano
@@ -81,7 +82,6 @@ export LC_tmux_session=remote
 
 {{ if .integration.hishtory.enabled -}}
 {{ template "hishtory_env.tmpl" . -}}
-source $HOME/$HISHTORY_PATH/config.zsh
 
 {{ end -}}
 

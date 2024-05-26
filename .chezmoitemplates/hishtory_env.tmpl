@@ -3,3 +3,4 @@ export HISHTORY_SERVER={{ .integration.hishtory.settings.server }}
 {{ end -}}
 export HISHTORY_PATH=".config/hishtory"
 export PATH="$PATH:$HOME/$HISHTORY_PATH"
+source $HOME/$HISHTORY_PATH/config.{{ get (dict "zsh" "zsh" "bash" "sh" ) .custom.shell }}

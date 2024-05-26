@@ -10,7 +10,7 @@ export AWS_CONFIG_FILE="${XDG_CONFIG_HOME}/aws/config"
 export LESSHISTFILE="${XDG_CACHE_HOME}/less/history"
 
 # Set Shell dependent variables
-{{- if eq .shell "bash" }}
+{{- if eq .custom.shell "bash" }}
 HISTFILE="${XDG_STATE_HOME}/bash/history"
-{{- else if eq .shell "zsh" }}
+{{- else if eq .custom.shell "zsh" }}
 {{- end }}
