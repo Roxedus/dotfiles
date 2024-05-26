@@ -15,7 +15,7 @@ integration:
   hishtory:
     enabled: true
     managed: true
-    version: "0.208"
+    version: "v0.208"
     offline: true
     settings:
       server: http://10.0.0.30:5453
