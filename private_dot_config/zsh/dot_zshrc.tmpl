@@ -16,57 +16,9 @@ zstyle :omz:plugins:ssh-agent lazy yes
 zstyle :omz:update mode disabled
 
 {{ if .integration.zsh.omz -}}
-export ZSH=$HOME/.oh-my-zsh
-
-HIST_STAMPS="%d/%m/%y %T"
-ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/ohmyzsh"
-
-plugins=(
-    ansible
-    colored-man-pages
-    colorize
-    command-not-found
-    common-aliases
-    docker
-    docker-compose
-    git
-    history
-    kubectl
-    pip
-    ssh-agent
-    terraform
-    virtualenv
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    {{ if eq .chezmoi.os "darwin" -}}
-    iterm2
-    {{ end -}}
-    {{ if not ( contains "code-server" .chezmoi.hostname) -}}
-    gpg-agent
-    vscode
-    {{ end -}}
-    {{ if eq .chezmoi.os "linux" -}}
-    {{ if eq .chezmoi.osRelease.name "Ubuntu" -}}
-    {{ end -}}
-    {{ end -}}
-    )
-
-{{ if eq .chezmoi.os "darwin" -}}
-source ~/.config/iterm2.sh
-
-{{ end -}}
-
-alias zshconfig="${EDITOR} $ZDOTDIR/.zshrc"
-alias ohmyzsh="${EDITOR} $ZSH"
-
-source $ZSH/oh-my-zsh.sh
-
+{{ template "omz_env.tmpl" . }}
 {{ else if .integration.zsh.antidote -}}
-source ${XDG_DATA_HOME}/antidote/antidote.zsh
-autoload -U add-zsh-hook
-
-zstyle :autovenv ignored /home/roxedus/projects/home-infra/ansible/.venv
-
+{{ template "antidote_env.tmpl" . }}
 {{ end -}}
 
 {{ if eq .chezmoi.os "linux" -}}
