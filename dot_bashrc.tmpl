@@ -1,29 +1,30 @@
 {{- if ne .chezmoi.os "windows" -}}
-{{ $bogus := (. | setValueAtPath "custom.shell" "bash") -}}
-{{ if (and (eq .chezmoi.os "linux") (not .codespaces)) -}}
+{{- $bogus := (. | setValueAtPath "custom.shell" "bash") -}}
+{{- if (and (eq .chezmoi.os "linux") (not .codespaces)) -}}
 source /etc/skel/.bashrc
-{{ end }}
 
-{{- template "xdg_env.tmpl" . }}
-####
-{{ if lookPath "brew" }}
-{{- template "brew_env.tmpl" . -}}
-{{ end }}
+{{ end -}}
 
+{{ template "xdg_env.tmpl" . }}
+{{ template "brew_env.tmpl" . }}
+{{ template "wsl_env.tmpl" . }}
+
+{{- /* ---- */ -}}
 export EDITOR=nano
 export PATH="$HOME/.local/bin:$HOME/.local/wrapped:$PATH"
 export LC_tmux_session=remote
 
-{{ template "wsl_env.tmpl" . }}
+{{ if .integration.eza.enabled -}}
+## Eza
+unalias l
+{{- end }}
+
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+    eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh.yaml)"
+fi
 
 {{ if .integration.hishtory.enabled -}}
 source ${XDG_CONFIG_HOME}/hishtory/config.sh
+{{- end }}
 
-{{ end -}}
-
-{{ if .integration.eza.enabled -}}
-unalias l
-{{ end -}}
-
-eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh.yaml)"
-{{ end -}}
+{{- end }}

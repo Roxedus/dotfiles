@@ -1,10 +1,11 @@
 {{- if .integration.zsh.enabled -}}
 {{ $bogus := (. | setValueAtPath "custom.shell" "zsh") -}}
-{{ template "xdg_env.tmpl" . }}
-{{- if lookPath "brew" }}
-{{ template "brew_env.tmpl" . }}
-{{- end }}
 
+{{ template "xdg_env.tmpl" . }}
+{{ template "brew_env.tmpl" . }}
+{{ template "wsl_env.tmpl" . }}
+
+{{- /* ---- */ -}}
 (( $+commands[vim] )) && export EDITOR=vim || export EDITOR=nano
 
 if [ "$VSCODE_INJECTION" = "1" ]; then
@@ -31,13 +32,6 @@ VSCODE=code-insiders
 
 export PATH="$HOME/.local/bin:$HOME/.local/wrapped:$PATH"
 export LC_tmux_session=remote
-
-{{ if .integration.hishtory.enabled -}}
-source ${XDG_CONFIG_HOME}/hishtory/config.zsh
-
-{{ end -}}
-
-{{ template "wsl_env.tmpl" . }}
 
 autoload -U +X bashcompinit && bashcompinit
 autoload -Uz +X compinit && compinit
@@ -72,4 +66,7 @@ fi
 {{ if .integration.zsh.antidote -}}
 antidote load
 {{ end -}}
+{{ if .integration.hishtory.enabled -}}
+source ${XDG_CONFIG_HOME}/hishtory/config.zsh
+{{ end }}
 {{ end -}}

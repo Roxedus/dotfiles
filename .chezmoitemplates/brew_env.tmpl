@@ -1,6 +1,8 @@
-{{- if eq .chezmoi.os "linux" -}}
+{{- if lookPath "brew" }}
+## Homebrew
+{{ if eq .chezmoi.os "linux" -}}
 HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
-{{- else if eq .chezmoi.os "darwin" -}}
+{{ else if eq .chezmoi.os "darwin" -}}
 HOMEBREW_PREFIX="/opt/homebrew"
 {{- end }}
 eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
@@ -16,4 +18,5 @@ else
 fi
 {{ else if eq .custom.shell "zsh" }}
 fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
+{{- end -}}
 {{- end -}}
