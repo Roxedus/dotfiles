@@ -1,20 +1,35 @@
-olets/zsh-window-title
-olets/zsh-abbr
-reegnz/jq-zsh-plugin
-zdharma-continuum/fast-syntax-highlighting
-zsh-users/zsh-completions path:src kind:fpath
+{{- if .integration.zsh.antidote -}}
+# Populate fpath
 junegunn/fzf path:shell/completion.zsh kind:fpath
-{{ if lookPath "terraform" }}
+junegunn/fzf path:shell/key-bindings.zsh kind:zsh
+zsh-users/zsh-completions path:src kind:fpath
+{{ if lookPath "terraform." -}}
 macunha1/zsh-terraform kind:fpath
-{{ end }}
-$ZDOTDIR/plugins/autovenv
+{{ end -}}
 
-ohmyzsh/ohmyzsh path:plugins/command-not-found
-{{ if not .codespaces -}}
-ohmyzsh/ohmyzsh path:plugins/ssh-agent
-{{ end }}
-belak/zsh-utils path:utility
-belak/zsh-utils path:history
+{{- /* ---- */}}
+# Load plugins
+olets/zsh-abbr kind:zsh
+olets/zsh-window-title kind:zsh
+{{ if lookPath "jq" -}}
+reegnz/jq-zsh-plugin kind:zsh
+{{ end -}}
 
+{{- /* ---- */}}
+$ZDOTDIR/plugins/autovenv kind:zsh
+
+ohmyzsh/ohmyzsh path:plugins/command-not-found kind:zsh
+ohmyzsh/ohmyzsh path:plugins/ssh-agent kind:zsh
+ohmyzsh/ohmyzsh path:plugins/sudo kind:zsh
+
+belak/zsh-utils path:history kind:zsh
+belak/zsh-utils path:utility kind:zsh
+
+# Load fpath, and run compinit
 belak/zsh-utils path:completion
-zsh-users/zsh-autosuggestions
+
+Aloxaf/fzf-tab kind:zsh
+
+zdharma-continuum/fast-syntax-highlighting kind:defer
+zsh-users/zsh-autosuggestions kind:zsh
+{{- end -}}
