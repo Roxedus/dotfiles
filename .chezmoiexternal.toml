@@ -1,20 +1,31 @@
 {{ if ne .chezmoi.os "windows" }}
-{{- $fzfVersion := (gitHubLatestRelease "junegunn/fzf").TagName -}}
+{{- /* Grab binaries */ -}}
+
+{{ $fzfVersion := (gitHubLatestRelease "junegunn/fzf").TagName -}}
 [".local/bin/fzf"]
     type = "archive-file"
     executable = true
     path = "fzf"
     url = "https://github.com/junegunn/fzf/releases/download/{{ $fzfVersion }}/fzf-{{ $fzfVersion }}-{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
     refreshPeriod = "168h"
-{{ if .integration.tmux.enhanced -}}
+
+{{ $lesspipeVersion := (gitHubLatestRelease "wofr06/lesspipe").TagName -}}
+[".local/bin/lesspipe.sh"]
+    type = "file"
+    executable = true
+    url = "https://raw.githubusercontent.com/wofr06/lesspipe/{{ $lesspipeVersion }}/lesspipe.sh"
+
+{{- /* Grab plugin managers */ -}}
+
+{{- if .integration.tmux.enhanced }}
 ["{{ joinPath .paths.XDG_CONFIG_HOME "tmux/plugins/tpm" }}"]
     type = "archive"
     url = "https://github.com/tmux-plugins/tpm/archive/master.tar.gz"
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
-{{ end }}
-{{ if .integration.zsh.antidote -}}
+{{- end }}
+{{- if .integration.zsh.antidote }}
 ["{{ joinPath .paths.XDG_DATA_HOME "antidote" }}"]
     type = "archive"
     url = "https://github.com/mattmc3/antidote/archive/master.tar.gz"
@@ -22,8 +33,8 @@
     include = ["antidote", "*/antidote.zsh", "*/functions/**"]
     stripComponents = 1
     refreshPeriod = "168h"
-{{ end }}
-{{- if .integration.zsh.omz -}}
+{{- end }}
+{{- if .integration.zsh.omz }}
 [".oh-my-zsh"]
     type = "archive"
     url = "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
@@ -42,38 +53,42 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
-{{ if eq .chezmoi.os "darwin" -}}
+{{ if eq .chezmoi.os "darwin" }}
 [".config/iterm2.sh"]
     type = "file"
     url = "https://iterm2.com/shell_integration/zsh"
     refreshPeriod = "168h"
-{{ end }}
-{{ end }}
-{{ if .integration.eza.enabled -}}
+{{- end }}
+{{- end }}
+
+{{- /* Grab integrations */ -}}
+
+{{- if .integration.eza.enabled }}
 {{ $ezaVersion := .integration.eza.version -}}
 {{- if eq .integration.eza.version "latest" }}
 {{ $ezaVersion = (gitHubLatestRelease "eza-community/eza").TagName -}}
-{{ end }}
-{{ $ezaArches := dict "amd64" "x86_64" "arm64" "aarch64" -}}
-{{ if .integration.eza.managed -}}
+{{- end }}
+{{- $ezaArches := dict "amd64" "x86_64" "arm64" "aarch64" -}}
+{{- if .integration.eza.managed -}}
 [".local/bin/eza"]
     type = "archive-file"
     executable = true
     path = "./eza"
     url = "https://github.com/eza-community/eza/releases/download/{{ $ezaVersion }}/eza_{{ get $ezaArches .chezmoi.arch }}-unknown-linux-gnu.tar.gz"
-{{ end }}
-{{ end }}
-{{ if .integration.hishtory.enabled -}}
+{{- end }}
+{{- end }}
+
+{{- if .integration.hishtory.enabled }}
 {{ $hishVersion := .integration.hishtory.version -}}
 {{- if eq .integration.hishtory.version "latest" }}
 {{ $hishVersion = (gitHubLatestRelease "ddworken/hishtory").TagName -}}
-{{ end }}
-{{ if .integration.hishtory.managed -}}
+{{- end }}
+{{- if .integration.hishtory.managed -}}
 [".config/hishtory/hishtory"]
     type = "file"
     executable = true
     url = "https://github.com/ddworken/hishtory/releases/download/{{ $hishVersion }}/hishtory-{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
-{{ end }}
+{{- end }}
 [".config/hishtory/config.zsh"]
     type = "file"
     executable = true
@@ -82,37 +97,41 @@
     type = "file"
     executable = true
     url = "https://raw.githubusercontent.com/ddworken/hishtory/{{ $hishVersion }}/client/lib/config.sh"
-{{ end }}
-{{ if .integration.bitwarden.managed -}}
-[".local/wrapped"]
+{{- end }}
+
+{{- if .integration.bitwarden.managed }}
+
+[".local/bin"]
     type = "archive"
     executable = true
     include = ["bw"]
-{{ if eq .chezmoi.os "darwin" -}}
+{{- if eq .chezmoi.os "darwin" }}
     url = "https://github.com/bitwarden/clients/releases/download/cli-v{{ .integration.bitwarden.version }}/bw-macos-{{ .integration.bitwarden.version }}.zip"
-{{ else -}}
+{{- else }}
     url = "https://github.com/bitwarden/clients/releases/download/cli-v{{ .integration.bitwarden.version }}/bw-{{ .chezmoi.os -}}-{{ .integration.bitwarden.version }}.zip"
-{{ end }}
-{{ end }}
-{{ if .integration.podman.managed -}}
+{{- end }}
+{{- end }}
+
+{{- if .integration.podman.managed -}}
 {{ $podmanVersion := .integration.podman.version -}}
 {{- if eq .integration.podman.version "latest" }}
 {{ $podmanVersion = (gitHubLatestRelease "containers/podman").TagName -}}
-{{ end }}
+{{- end }}
 [".local/bin/podman"]
     type = "archive-file"
     executable = true
     path = "bin/podman-remote-static-{{ .chezmoi.os }}_{{ .chezmoi.arch }}"
     url = "https://github.com/containers/podman/releases/download/{{ $podmanVersion }}/podman-remote-static-{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
-{{ end }}
-{{ end }}
-{{ if .integration.oh_my_posh.managed -}}
+{{- end }}
+{{- end }}
+
+{{- if .integration.oh_my_posh.managed -}}
 {{ $ompVersion := nospace (cat "v" .integration.oh_my_posh.version) -}}
 {{- if eq .integration.oh_my_posh.version "latest" }}
 {{ $ompVersion = (gitHubLatestRelease "JanDeDobbeleer/oh-my-posh").TagName -}}
-{{ end }}
+{{- end }}
 [".local/bin/oh-my-posh"]
     type = "file"
     executable = true
     url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/{{ $ompVersion }}/posh-{{ .chezmoi.os }}-{{ .chezmoi.arch }}{{ if eq .chezmoi.os "windows" }}.exe{{end}}"
-{{ end }}
+{{- end }}
