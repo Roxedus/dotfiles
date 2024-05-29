@@ -1,0 +1,12 @@
+{{ if .integration.zsh.antidote -}}
+#!/bin/zsh
+
+# zsh_plugins.txt hash: {{ include "private_dot_config/zsh/dot_zsh_plugins.txt.tmpl" | sha256sum }}
+
+{{ template "xdg_env.tmpl" . }}
+
+source ${XDG_DATA_HOME}/antidote/antidote.zsh
+
+antidote update
+
+{{ end -}}
