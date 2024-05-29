@@ -39,8 +39,8 @@ integration:
     enhanced: false
   zsh:
     enabled: true
-    antidote: false
-    omz: true
+    antidote: true
+    omz: false
 
 machine:
   iac: false
