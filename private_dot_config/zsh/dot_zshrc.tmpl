@@ -33,7 +33,7 @@ export LC_tmux_session=remote
 (( $+commands[oh-my-posh] )) && (( $+_comps[oh-my-posh] )) && source <(oh-my-posh completion zsh)
 
 (( $+commands[bat] )) && \
-    export BAT_THEME="DarkNeon" && \
+    export BAT_THEME="Nord" && \
     export MANPAGER="sh -c 'col -bx | bat -l man -p'" && \
     alias -g -- --help='--help 2>&1 | bat --language=help --style=plain' && \
     alias -g -- -h='-h 2>&1 | bat --language=help --style=plain' && \
