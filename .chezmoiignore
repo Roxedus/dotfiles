@@ -1,7 +1,7 @@
 .vscode/
 .encrypted_vars/
 {{- if ne .chezmoi.os "windows" }}
-run_*.ps1
+.ps1
 .config/powershell/Microsoft.PowerShell_profile.ps1
 Documents/
 AppData/
@@ -13,7 +13,7 @@ AppData/
 .zshenv
 .bashrc
 .bash_aliases
-run_*.sh
+*.sh
 {{- if .machine.work }}
 Documents/ShareX
 {{- end }}

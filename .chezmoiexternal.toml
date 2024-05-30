@@ -101,7 +101,7 @@
 
 {{- if .integration.bitwarden.managed }}
 
-[".local/bin"]
+[".local/wrapped"]
     type = "archive"
     executable = true
     include = ["bw"]
