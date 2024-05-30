@@ -125,6 +125,13 @@
 {{- end }}
 {{- end }}
 
+{{- if .integration.kubernetes.enabled }}
+["{{ joinPath .paths.XDG_CONFIG_HOME "k9s/skins/nord.yaml" }}"]
+    type = "file"
+    executable = true
+    url = "https://raw.githubusercontent.com/derailed/k9s/master/skins/nord.yaml"
+{{- end }}
+
 {{- if .integration.oh_my_posh.managed -}}
 {{ $ompVersion := nospace (cat "v" .integration.oh_my_posh.version) -}}
 {{- if eq .integration.oh_my_posh.version "latest" }}
