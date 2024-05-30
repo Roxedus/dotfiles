@@ -1,4 +1,5 @@
 {{ if .integration.zsh.antidote -}}
+{{- $bogus := (. | setValueAtPath "custom.shell" "zsh") -}}
 #!/bin/zsh
 
 # zsh_plugins.txt hash: {{ include "private_dot_config/zsh/dot_zsh_plugins.txt.tmpl" | sha256sum }}
