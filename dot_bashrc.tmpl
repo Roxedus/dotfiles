@@ -8,6 +8,7 @@ source /etc/skel/.bashrc
 {{ template "xdg_env.tmpl" . }}
 {{ template "brew_env.tmpl" . }}
 {{ template "wsl_env.tmpl" . }}
+{{ template "code_env.tmpl" . }}
 
 {{- /* ---- */ -}}
 export EDITOR=nano
@@ -20,7 +21,7 @@ unalias l
 {{- end }}
 
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-    eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh.yaml)"
+    eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh.yaml)"
 fi
 
 {{ if .integration.hishtory.enabled -}}
