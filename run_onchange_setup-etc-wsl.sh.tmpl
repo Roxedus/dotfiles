@@ -1,4 +1,4 @@
-{{- if (and (eq .chezmoi.os "linux") (not .codespaces)) }}
+{{- if (and (eq .chezmoi.os "linux") (not .machine.ci)) }}
 {{- if (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
 #!/bin/bash
 

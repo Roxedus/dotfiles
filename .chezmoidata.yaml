@@ -45,6 +45,7 @@ integration:
 machine:
   iac: false
   work: false
+  ci: false
   wslName:
 
 paths:

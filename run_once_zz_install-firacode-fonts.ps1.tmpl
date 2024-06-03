@@ -1,4 +1,5 @@
 {{- if lookPath "oh-my-posh" -}}
+{{- if not .machine.ci -}}
 {{- if .integration.oh_my_posh.enabled -}}
 {{- if eq .chezmoi.os "windows" -}}
 if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
@@ -10,6 +11,7 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 }
 
 oh-my-posh font install firacode
+{{ end -}}
 {{ end -}}
 {{ end -}}
 {{- end }}

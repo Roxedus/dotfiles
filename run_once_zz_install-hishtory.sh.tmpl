@@ -1,5 +1,6 @@
 {{- if ne .chezmoi.os "windows" -}}
 {{- if .integration.hishtory.enabled -}}
+{{- if not .machine.ci -}}
 {{ $bogus := (. | setValueAtPath "custom.shell" "bash") -}}
 #!/bin/bash
 
@@ -14,5 +15,6 @@ set -o pipefail
 {{- $hishSecret = joinPath .chezmoi.sourceDir "/.encrypted_vars/hishtory.age" | include | decrypt -}}
 {{- end }}
 hishtory init {{ $hishSecret | trim }} || true
+{{ end -}}
 {{ end -}}
 {{ end }}

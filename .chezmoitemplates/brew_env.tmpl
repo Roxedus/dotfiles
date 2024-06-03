@@ -1,3 +1,4 @@
+{{- if not .machine.ci }}
 {{- if lookPath "brew" }}
 ## Homebrew
 {{ if eq .chezmoi.os "linux" -}}
@@ -18,5 +19,6 @@ else
 fi
 {{ else if eq .custom.shell "zsh" }}
 fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
+{{- end -}}
 {{- end -}}
 {{- end -}}

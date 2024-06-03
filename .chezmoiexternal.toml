@@ -2,6 +2,7 @@
 {{- /* Grab binaries */ -}}
 
 {{ $fzfVersion := (gitHubLatestRelease "junegunn/fzf").TagName -}}
+{{- if not .machine.ci }}
 [".local/bin/fzf"]
     type = "archive-file"
     executable = true
@@ -9,6 +10,7 @@
     url = "https://github.com/junegunn/fzf/releases/download/{{ $fzfVersion }}/fzf-{{ $fzfVersion }}-{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
     refreshPeriod = "168h"
 
+{{ end }}
 {{ $lesspipeVersion := (gitHubLatestRelease "wofr06/lesspipe").TagName -}}
 [".local/bin/lesspipe.sh"]
     type = "file"

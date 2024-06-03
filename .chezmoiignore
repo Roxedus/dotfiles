@@ -1,5 +1,7 @@
 .vscode/
 .encrypted_vars/
+.ci/
+.github/
 {{- if ne .chezmoi.os "windows" }}
 .ps1
 .config/powershell/Microsoft.PowerShell_profile.ps1
