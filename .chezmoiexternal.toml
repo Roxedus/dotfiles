@@ -137,7 +137,7 @@
 {{- if eq .integration.oh_my_posh.version "latest" }}
 {{ $ompVersion = (gitHubLatestRelease "JanDeDobbeleer/oh-my-posh").TagName -}}
 {{- end }}
-[".local/bin/oh-my-posh"]
+[".local/bin/oh-my-posh{{ if eq .chezmoi.os "windows" }}.exe{{end}}"]
     type = "file"
     executable = true
     url = "https://github.com/JanDeDobbeleer/oh-my-posh/releases/download/{{ $ompVersion }}/posh-{{ .chezmoi.os }}-{{ .chezmoi.arch }}{{ if eq .chezmoi.os "windows" }}.exe{{end}}"
