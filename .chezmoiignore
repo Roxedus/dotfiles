@@ -7,9 +7,8 @@ Documents/
 AppData/
 {{- end }}
 {{- if eq .chezmoi.os "windows" }}
-.config/zsh
-.config/zsh-abbr
-.config/tmux
+.config/
+.local/
 .zshenv
 .bashrc
 .bash_aliases
