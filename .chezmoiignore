@@ -12,6 +12,7 @@ AppData/
 .config/tmux
 .config/zsh
 .config/zsh-abbr
+.config/powershell
 .zshenv
 .bashrc
 .bash_aliases

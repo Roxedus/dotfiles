@@ -1,3 +1,4 @@
+{{- if eq .chezmoi.os "linux" }}
 {{ if .integration.hishtory.enabled -}}
 #!/bin/bash
 
@@ -5,4 +6,5 @@ export HISHTORY_PATH=".config/hishtory"
 export HISHTORY_SERVER=http://10.0.0.30:5453
 
 $HOME/$HISHTORY_PATH/hishtory "$@"
+{{ end -}}
 {{ end -}}
