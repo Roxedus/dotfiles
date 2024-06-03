@@ -1,0 +1,28 @@
+data:
+  integration:
+    bitwarden:
+      enabled: false
+      managed: false
+    oh_my_posh:
+      managed: false
+    hishtory:
+      enabled: false
+    zsh:
+      enabled: true
+      antidote: true
+      omz: false
+    tmux:
+      enhanced: true
+    podman:
+      managed: false
+      version: latest
+  git:
+    sign: false
+  machine:
+    work: true
+    ci: true
+
+scriptTempDir: /tmp
+destDir: /out
+sourceDir: /inn
+cacheDir: /tmp/.cache
