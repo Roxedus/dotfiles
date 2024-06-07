@@ -9,6 +9,11 @@
     path = "fzf"
     url = "https://github.com/junegunn/fzf/releases/download/{{ $fzfVersion }}/fzf-{{ $fzfVersion }}-{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
     refreshPeriod = "168h"
+[".local/bin/fzf-tmux"]
+    type = "file"
+    executable = true
+    url = "https://raw.githubusercontent.com/junegunn/fzf/{{ $fzfVersion }}/bin/fzf-tmux"
+    refreshPeriod = "168h"
 
 {{ end }}
 {{ $lesspipeVersion := (gitHubLatestRelease "wofr06/lesspipe").TagName -}}
