@@ -1,0 +1,25 @@
+# Dotfile notes
+{{ if .machine.ci }}
+**CI GENERATED**
+{{ end }}
+```yml
+{{ .chezmoi.config.data | toYaml -}}
+```
+{{ if .integration.zsh.enabled }}
+## ZSH
+
+Framework: {{ if (and (.integration.zsh.antidote) (.integration.zsh.omz)) }}Shits funky{{ else if .integration.zsh.antidote }}Antidote{{ else if .integration.zsh.omz }}OMZ{{ end }}
+{{ if .integration.zsh.antidote }}
+### Abbreviations
+
+```ini
+{{ include "private_dot_config/zsh-abbr/user-abbreviations" -}}
+```
+{{ end -}}
+{{ end -}}
+{{ if .integration.podman.managed }}
+## Podman
+
+Configure connection: https://podman-desktop.io/docs/podman/accessing-podman-from-another-wsl-instance#changing-the-connection
+
+{{ end }}
