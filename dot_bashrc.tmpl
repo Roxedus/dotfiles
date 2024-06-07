@@ -16,6 +16,8 @@ command -v vim >/dev/null 2>&1 && export EDITOR=vim || export EDITOR=nano
 export PATH="$HOME/.local/bin:$HOME/.local/wrapped:$PATH"
 export LC_tmux_session=remote
 
+command -v fzf >/dev/null 2>&1 && source <(fzf --bash)
+
 {{ if .integration.eza.enabled -}}
 ## Eza
 unalias l

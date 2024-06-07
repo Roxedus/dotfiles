@@ -29,6 +29,7 @@ export LC_tmux_session=remote
 
 (( $+commands[chezmoi] )) && (( $+_comps[chezmoi] )) && source <(chezmoi completion zsh)
 (( $+commands[docker] )) && (( $+_comps[docker] )) && source <(docker completion zsh)
+(( $+commands[fzf] )) && (( $+_comps[fzf] )) && source <(fzf --zsh)
 (( $+commands[hishtory] )) && (( $+_comps[hishtory] )) && source <(hishtory completion zsh)
 (( $+commands[oh-my-posh] )) && (( $+_comps[oh-my-posh] )) && source <(oh-my-posh completion zsh)
 
