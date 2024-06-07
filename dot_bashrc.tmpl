@@ -20,7 +20,7 @@ command -v fzf >/dev/null 2>&1 && source <(fzf --bash)
 
 {{ if .integration.eza.enabled -}}
 ## Eza
-unalias l
+unalias l 2>/dev/null
 {{- end }}
 
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
