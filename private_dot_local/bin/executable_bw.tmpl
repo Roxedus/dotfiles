@@ -1,11 +1,10 @@
-{{- if eq .chezmoi.os "linux" }}
-{{ if .integration.bitwarden.enabled -}}
+{{- if eq .chezmoi.os "linux" -}}
+{{- if .integration.bitwarden.enabled -}}
 #!/bin/bash
 
-export PATH="${PATH//$HOME\/.local\/bin:/}"
+export PATH="${PATH#$HOME/.local/bin:}"
 
-#exit 1
 # Run Bitwarden CLI with no deprecation warnings
-NODE_OPTIONS="--no-deprecation" bw "$@"
+NODE_OPTIONS="--no-deprecation" exec bw "$@"
 {{ end -}}
 {{ end -}}
