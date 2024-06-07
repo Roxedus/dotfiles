@@ -8,7 +8,7 @@ source /etc/skel/.bashrc
 {{ template "xdg_env.tmpl" . }}
 {{ template "brew_env.tmpl" . }}
 {{ template "wsl_env.tmpl" . }}
-(( $+commands[vim] )) && export EDITOR=vim || export EDITOR=nano
+command -v vim && export EDITOR=vim || export EDITOR=nano
 
 {{ template "code_env.tmpl" . }}
 
