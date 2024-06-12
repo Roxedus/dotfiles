@@ -113,9 +113,9 @@
     executable = true
     include = ["bw"]
 {{- if eq .chezmoi.os "darwin" }}
-    url = "https://github.com/bitwarden/clients/releases/download/cli-v{{ .integration.bitwarden.version }}/bw-macos-{{ .integration.bitwarden.version }}.zip"
+    url = "https://github.com/bitwarden/clients/releases/download/cli-v{{ .integration.bitwarden.version }}/bw-oss-macos-{{ .integration.bitwarden.version }}.zip"
 {{- else }}
-    url = "https://github.com/bitwarden/clients/releases/download/cli-v{{ .integration.bitwarden.version }}/bw-{{ .chezmoi.os -}}-{{ .integration.bitwarden.version }}.zip"
+    url = "https://github.com/bitwarden/clients/releases/download/cli-v{{ .integration.bitwarden.version }}/bw-oss-{{ .chezmoi.os -}}-{{ .integration.bitwarden.version }}.zip"
 {{- end }}
 {{- end }}
 
