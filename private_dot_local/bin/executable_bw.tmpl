@@ -2,9 +2,7 @@
 {{- if .integration.bitwarden.enabled -}}
 #!/bin/bash
 
-export PATH="${PATH#$HOME/.local/bin:}"
-
 # Run Bitwarden CLI with no deprecation warnings
-NODE_OPTIONS="--no-deprecation" exec bw "$@"
+NODE_OPTIONS="--no-deprecation" exec $HOME/.local/wrapped/bw "$@"
 {{ end -}}
 {{ end -}}
