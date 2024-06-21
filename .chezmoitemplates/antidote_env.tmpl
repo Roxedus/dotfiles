@@ -15,17 +15,5 @@ zstyle ':completion:*:descriptions' format '[%d]'
 # Set defaults
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
-# Command specific preview settings
-zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word'
-zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}'
-{{ if .integration.eza.enabled -}}
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-{{ else -}}
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-{{ end }}
-
-# Wildcard preview settings
-zstyle ':fzf-tab:complete:*:*' fzf-preview 'less ${(Q)realpath}'
-
 export LESS='-R'
-export LESSOPEN='|lessfilter.sh %s'
+export LESSOPEN='|lesspipe.sh %s'

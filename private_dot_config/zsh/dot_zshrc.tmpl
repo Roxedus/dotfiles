@@ -27,11 +27,29 @@ export GPG_TTY=$(tty)
 export PATH="$HOME/.local/bin:$HOME/.local/wrapped:$PATH"
 export LC_tmux_session=remote
 
-(( $+commands[chezmoi] )) && (( $+_comps[chezmoi] )) && source <(chezmoi completion zsh)
-(( $+commands[docker] )) && (( $+_comps[docker] )) && source <(docker completion zsh)
-(( $+commands[fzf] )) && (( $+_comps[fzf] )) && source <(fzf --zsh)
-(( $+commands[hishtory] )) && (( $+_comps[hishtory] )) && source <(hishtory completion zsh)
-(( $+commands[oh-my-posh] )) && (( $+_comps[oh-my-posh] )) && source <(oh-my-posh completion zsh)
+comp_path=$HOME/.local/share/zsh/completions
+mkdir -p $comp_path
+fpath=("$comp_path" $fpath)
+
+typeset -A bins=(
+    [bw]="completion --shell zsh"
+    [docker]="completion zsh"
+    [hishtory]="completion zsh"
+    [oh-my-posh]="completion zsh"
+    )
+
+for compbin cmd in ${(kv)bins}; do
+    if [ -f $HOME/.local/bin/$compbin ] ; then
+        if [ -f $comp_path/_$compbin ]; then
+            if [ $(find "$comp_path/_$compbin" -mtime -1 -print) ]; then
+                continue
+            else
+                rm "$comp_path/_$compbin"
+            fi
+        fi
+        $compbin ${(z)cmd} > "$comp_path/_$compbin"
+    fi
+done
 
 (( $+commands[bat] )) && \
     export BAT_THEME="Nord" && \
@@ -42,7 +60,6 @@ export LC_tmux_session=remote
     alias rcat="command cat"
 
 {{ if .integration.bitwarden.enabled -}}
-(( $+commands[bw] )) && (( $+_comps[bw] )) && source <(bw completion --shell zsh)
 alias bwopen='export BW_SESSION=${BW_SESSION:-$(bw unlock --raw)}'
 
 {{ end -}}
