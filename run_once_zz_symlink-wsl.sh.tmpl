@@ -4,6 +4,9 @@
 if [ ! -d "/mnt/c/Users/{{ default .chezmoi.username .machine.wslName }}/.ssh" ];then
     echo "Could not find a SSH directory in  /mnt/c/Users/{{ default .chezmoi.username .machine.wslName }}"
 else
+    if [ ! -d "/home/{{ .chezmoi.username }}/.ssh" ];then
+        mkdir -p /home/{{ .chezmoi.username }}/.ssh
+    fi
     if [ ! -L "/home/{{ .chezmoi.username }}/.ssh" ] && [ -d "/mnt/c/Users/{{ default .chezmoi.username .machine.wslName }}/.ssh" ];then
         ln -s /mnt/c/Users/{{ default .chezmoi.username .machine.wslName }}/.ssh/config ~/.ssh/
     fi
