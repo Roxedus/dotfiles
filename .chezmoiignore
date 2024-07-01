@@ -9,15 +9,16 @@ Documents/
 AppData/
 {{- end }}
 {{- if eq .chezmoi.os "windows" }}
+.bash_aliases
+.bashrc
 .config/htop
 .config/k9s
+.config/powershell
 .config/tmux
 .config/zsh
 .config/zsh-abbr
-.config/powershell
+.local/share/zsh
 .zshenv
-.bashrc
-.bash_aliases
 *.sh
 {{- if .machine.work }}
 Documents/ShareX
