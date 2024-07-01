@@ -4,7 +4,7 @@ mime=$(file -bL --mime-type "$1")
 category=${mime%%/*}
 kind=${mime##*/}
 echo "${1}"
-if [ -n "$1" ]; then
+if [ -f "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" ]; then
 	echo "${1}"
 {{- if .integration.eza.enabled }}
 elif [ -d "$1" ]; then
