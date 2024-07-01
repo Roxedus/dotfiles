@@ -42,6 +42,11 @@ integration:
     antidote: true
     omz: false
 
+windows:
+  terminal:
+    enabled: false
+    profiles: []
+
 machine:
   iac: false
   work: false
