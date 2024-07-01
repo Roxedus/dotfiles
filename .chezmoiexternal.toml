@@ -67,6 +67,11 @@
     refreshPeriod = "168h"
 {{- end }}
 {{- end }}
+{{- if .terminal.alacritty.enabled }}
+["{{ joinPath .paths.XDG_CONFIG_HOME "alacritty" "theme.toml" }}"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/alacritty/alacritty-theme/master/themes/{{ .terminal.theme | lower}}.toml"
+{{- end }}
 
 {{- /* Grab integrations */ -}}
 

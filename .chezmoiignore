@@ -11,6 +11,7 @@ AppData/
 {{- if eq .chezmoi.os "windows" }}
 .bash_aliases
 .bashrc
+.config/alacritty
 .config/htop
 .config/k9s
 .config/powershell

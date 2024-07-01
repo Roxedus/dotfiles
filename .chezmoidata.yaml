@@ -42,6 +42,13 @@ integration:
     antidote: true
     omz: false
 
+terminal:
+  font: FiraCode
+  size: 12
+  theme: Nord
+  alacritty:
+    enabled: true
+
 windows:
   terminal:
     enabled: false
