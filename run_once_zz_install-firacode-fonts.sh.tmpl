@@ -5,7 +5,7 @@
 #!/bin/bash
 {{- end }}
 
-oh-my-posh font install firacode
+oh-my-posh font install {{ .terminal.font | lower }}
 {{- end }}
 {{ end }}
 {{ end }}

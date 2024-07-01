@@ -10,7 +10,7 @@ if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
   }
 }
 
-oh-my-posh font install firacode
+oh-my-posh font install {{ .terminal.font | lower }}
 {{ end -}}
 {{ end -}}
 {{ end -}}
