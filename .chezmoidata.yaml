@@ -47,7 +47,7 @@ terminal:
   size: 12
   theme: Nord
   alacritty:
-    enabled: true
+    enabled: false
 
 windows:
   terminal:
