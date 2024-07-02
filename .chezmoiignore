@@ -7,6 +7,12 @@
 .config/powershell/Microsoft.PowerShell_profile.ps1
 Documents/
 AppData/
+{{- if not .terminal.alacritty.enabled }}
+.config/alacritty
+{{- end }}
+{{- if not .integration.kubernetes.enabled -}}
+.config/k9s
+{{- end }}
 {{- end }}
 {{- if eq .chezmoi.os "windows" }}
 .bash_aliases
