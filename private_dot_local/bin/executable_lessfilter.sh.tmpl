@@ -1,4 +1,4 @@
-
+{{- if eq .chezmoi.os "linux" -}}
 #! /usr/bin/env sh
 mime=$(file -bL --mime-type "$1")
 category=${mime%%/*}
@@ -19,3 +19,4 @@ elif [ "$category" = text ]; then
 else
 	lesspipe.sh "$1"
 fi
+{{ end -}}
