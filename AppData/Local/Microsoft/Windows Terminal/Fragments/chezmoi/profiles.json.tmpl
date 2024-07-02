@@ -1,6 +1,8 @@
-{{ if .windows.terminal.enabled -}}
+{{- if .terminal.windows.enabled -}}
+{{- if ne (len .terminal.windows.profiles) 0 -}}
+{{- if eq .chezmoi.os "windows" -}}
 {
-    "profiles": [{{ range .windows.terminal.profiles }}
+    "profiles": [{{ range .terminal.windows.profiles }}
         {
             "updates": "{{ list "{" . "}" | join "" }}",
             "opacity": 70,
@@ -8,7 +10,7 @@
             "cursorShape": "bar",
             "colorScheme": "Transpy",
             "font": {
-                "face": "{{ .terminal.font }} Nerd Font"
+                "face": "{{ $.terminal.font }} Nerd Font"
             }
         },{{ end }}
     ],
@@ -38,4 +40,6 @@
         }
     ]
 }
+{{ end -}}
+{{ end -}}
 {{ end -}}

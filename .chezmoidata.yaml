@@ -48,9 +48,7 @@ terminal:
   theme: Nord
   alacritty:
     enabled: false
-
-windows:
-  terminal:
+  windows:
     enabled: false
     profiles: []
 
