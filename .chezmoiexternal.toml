@@ -7,7 +7,7 @@
     type = "archive-file"
     executable = true
     path = "fzf"
-    url = "https://github.com/junegunn/fzf/releases/download/{{ $fzfVersion }}/fzf-{{ $fzfVersion }}-{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
+    url = "https://github.com/junegunn/fzf/releases/download/{{ $fzfVersion }}/fzf-{{ $fzfVersion | replace "v" "" }}-{{ .chezmoi.os }}_{{ .chezmoi.arch }}.tar.gz"
     refreshPeriod = "168h"
 [".local/bin/fzf-tmux"]
     type = "file"
