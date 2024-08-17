@@ -1,0 +1,37 @@
+{{- if lookPath "paru" -}}
+#!/bin/bash
+
+paru -S <<EOF
+"extra/age"
+"extra/alacritty"
+"extra/bat"
+"extra/htop"
+"extra/just"
+"extra/tmux"
+{{ if and (not .integration.bitwarden.managed) .integration.bitwarden.enabled -}}
+"extra/bitwarden-cli"
+{{ end -}}
+"extra/bpython"
+"aur/chroma-bin"
+{{ if and (not .integration.eza.managed) .integration.eza.enabled -}}
+"extra/eza"
+{{ end -}}
+"aur/jnv"
+"extra/go-yq"
+"extra/jq"
+"extra/python-pygments"
+"extra/syft"
+{{ if and (not .integration.kubernetes.managed) .integration.kubernetes.enabled -}}
+"aur/krew-bin"
+"aur/kubecolor"
+"extra/fluxcd"
+"extra/helm"
+"extra/k9s"
+"extra/kubectl"
+"extra/opentofu"
+"extra/sops"
+"extra/talosctl"
+{{ end -}}
+EOF
+
+{{ end -}}
