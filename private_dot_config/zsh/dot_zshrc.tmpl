@@ -27,6 +27,11 @@ export GPG_TTY=$(tty)
 export PATH="$HOME/.local/bin:$HOME/.local/wrapped:$PATH"
 export LC_tmux_session=remote
 
+{{ if .integration.kubernetes.enabled -}}
+export KREW_ROOT=${XDG_CONFIG_HOME}/krew
+export PATH="${KREW_ROOT}/bin:$PATH"
+{{ end -}}
+
 comp_path=$HOME/.local/share/zsh/completions
 mkdir -p $comp_path
 fpath=("$comp_path" $fpath)
