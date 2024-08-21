@@ -1,7 +1,7 @@
-{{- if lookPath "paru" -}}
+{{- if lookPath "yay" -}}
 #!/bin/bash
 
-paru -S <<EOF
+packages=(
 "extra/age"
 "extra/alacritty"
 "extra/bat"
@@ -32,6 +32,8 @@ paru -S <<EOF
 "extra/sops"
 "extra/talosctl"
 {{ end -}}
-EOF
+)
+
+yay -S ${packages[*]}
 
 {{ end -}}
