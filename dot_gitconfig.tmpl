@@ -25,5 +25,9 @@
 	helper = {{ .git.helper }}
 {{- if .git.store }}
 	credentialStore = {{ .git.store }}
+{{ end -}}
+{{- if .git.extend }}
+[include]
+    path = ~/.config/gitconfig/extend
 {{ end }}
 {{- end -}}

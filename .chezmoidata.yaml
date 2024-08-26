@@ -6,6 +6,7 @@ git:
   key: ""
   helper: cache
   store:
+  extend: false
 
 integration:
   bitwarden:
