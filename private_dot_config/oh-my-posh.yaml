@@ -34,7 +34,6 @@ blocks:
             bash: "B"
             zsh: "Z"
     type: rprompt
-    ###
   - alignment: left
     segments:
       - style: plain
@@ -55,30 +54,40 @@ blocks:
         foreground: "#306998"
         powerline_symbol: "\uE0B0"
         style: powerline
-        template: " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}"
+        template: "{{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }} {{ .Venv }}{{ end }} {{ .Full }}{{ end }}"
         type: python
       - background: "#0b59e7"
         foreground: "#000000"
         powerline_symbol: "\uE0B0"
         style: powerline
-        template: '{{ if ne .Context "default" }} {{ .Context }}{{end}} '
+        template: '{{ if ne .Context "default" }}  {{ .Context }}{{end}}'
         type: docker
       - background: "#326ce5"
         foreground: "#ffffff"
         powerline_symbol: "\uE0B0"
         style: powerline
-        template: "\uf21a {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
+        template: " \uf21a {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}}"
         type: kubectl
         properties:
-          include_folders:
+          include_folders: &kube-folders
             - .*kube.*
             - .*argo.*
+            - .*helm.*
+            - .*infra.*
+      - background: "#da3832"
+        foreground: "#ffffff"
+        powerline_symbol: "\uE0B0"
+        template: " \uf21a {{ .Context }}"
+        style: powerline
+        type: talosctl
+        properties:
+          include_folders: *kube-folders
       - type: terraform
         style: powerline
         powerline_symbol: 
         foreground: "#000000"
         background: "#5c4ee5"
-        template: "\ue69a {{.WorkspaceName}}"
+        template: " \ue69a {{.WorkspaceName}}"
     type: prompt
   - alignment: left
     newline: true
@@ -133,28 +142,39 @@ tooltips:
     foreground: *r-foreground
     style: plain
   - type: kubectl
-    tips:
-      - k
+    tips: &kube-aliases
+      - helm
+      - k9s
       - kubectl
-    template: "\uf21a {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} "
+      - talosctl
+    template: "\uf21a {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}}"
+    foreground: *r-foreground
+    style: plain
+  - type: helm
+    tips: *kube-aliases
+    foreground: *r-foreground
+    style: plain
+  - type: talosctl
+    tips: *kube-aliases
     foreground: *r-foreground
     style: plain
   - type: terraform
     tips:
-      - tf
       - terraform
+      - terraform-docs
+      - tofu
     template: "\ue69a {{.WorkspaceName}}"
     foreground: *r-foreground
     style: plain
 
 secondary_prompt:
   background: transparent
-  foreground: "#133b55"
-  template: "-\ue285 "
+  foreground: "#ffff55"
+  template: "<u>></u>"
 transient_prompt:
   background: transparent
   foreground: *r-foreground
-  template: "{{ .Segments.Time.CurrentDate | date \"15:04:05\" }}/{{ .Shell }}>"
+  template: '{{ .Segments.Time.CurrentDate | date "15:04:05" }}/{{ .Shell }}>'
 error_line:
   background: transparent
   foreground: *r-foreground
