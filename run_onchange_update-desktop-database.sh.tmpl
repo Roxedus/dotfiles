@@ -1,8 +1,10 @@
-{{ if .integration.zsh.antidote -}}
+{{- if (and (eq .chezmoi.os "linux") (not .machine.ci)) }}
+{{- if not (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
 #!/bin/bash
 
 # code.desktop hash: {{ include "private_dot_local/share/private_applications/code.desktop" | sha256sum }}
 
 update-desktop-database ~/.local/share/applications
 
-{{ end -}}
+{{- end }}
+{{ end }}
