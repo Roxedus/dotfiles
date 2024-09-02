@@ -23,3 +23,15 @@ Framework: {{ if (and (.integration.zsh.antidote) (.integration.zsh.omz)) }}Shit
 Configure connection: https://podman-desktop.io/docs/podman/accessing-podman-from-another-wsl-instance#changing-the-connection
 
 {{ end }}
+{{ if .git.sign }}
+## SSH
+
+To specify a SSH key without using its path, use the `key::` [prefix](https://github.com/git/git/blob/350a2518c8ea4f42934b4d6f3466d2815efff97f/Documentation/config/user.txt#L39-L48)
+
+For a residential key, the syntax would be:
+
+```ini
+key::sk-ssh-ed25519@openssh.com <PUBKEY>
+```
+
+{{ end }}
