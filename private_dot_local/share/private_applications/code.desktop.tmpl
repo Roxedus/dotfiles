@@ -1,3 +1,4 @@
+{{ if ( "/usr/share/applications/code.desktop" | lstat) -}}
 [Desktop Entry]
 Name=Visual Studio Code
 Comment=Code Editing. Redefined.
@@ -25,3 +26,4 @@ Name[zh_CN]=新建空窗口
 Name[zh_TW]=開新空視窗
 Exec=/usr/bin/code --new-window %F
 Icon=visual-studio-code
+{{ end }}

@@ -2,7 +2,8 @@
 {{- if not (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
 #!/bin/bash
 
-# code.desktop hash: {{ include "private_dot_local/share/private_applications/code.desktop" | sha256sum }}
+# code.desktop hash: {{ include "private_dot_local/share/private_applications/code.desktop.tmpl" | sha256sum }}
+# visual-studio-code-insiders.desktop hash: {{ include "private_dot_local/share/private_applications/visual-studio-code-insiders.desktop.tmpl" | sha256sum }}
 
 update-desktop-database ~/.local/share/applications
 
