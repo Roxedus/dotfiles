@@ -25,5 +25,5 @@ function vsc {
 }
 
 if [ "$VSCODE_INJECTION" = "1" ]; then
-    export EDITOR=$VSCODE
+    export EDITOR="$VSCODE -w"
 fi
