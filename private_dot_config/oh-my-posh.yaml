@@ -186,4 +186,4 @@ valid_line:
 #console_title_template: "{{.UserName}}@{{.HostName}} {{.Shell}} in {{.PWD}}"
 pwd: osc99
 shell_integration: true
-version: 2
+version: 3
