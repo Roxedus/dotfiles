@@ -68,20 +68,18 @@ blocks:
         style: powerline
         template: " \uf21a {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}}"
         type: kubectl
-        properties:
-          include_folders: &kube-folders
-            - .*kube.*
-            - .*argo.*
-            - .*helm.*
-            - .*infra.*
+        include_folders: &kube-folders
+          - .*kube.*
+          - .*argo.*
+          - .*helm.*
+          - .*infra.*
       - background: "#da3832"
         foreground: "#ffffff"
         powerline_symbol: "\uE0B0"
         template: " \uf21a {{ .Context }}"
         style: powerline
         type: talosctl
-        properties:
-          include_folders: *kube-folders
+        include_folders: *kube-folders
       - type: terraform
         style: powerline
         powerline_symbol: 
