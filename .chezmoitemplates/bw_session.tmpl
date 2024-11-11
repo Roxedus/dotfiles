@@ -12,7 +12,7 @@ bw_session () {
         exit $?
     fi
 
-    tmpfile=${XDG_RUNTIME_DIR}bw_session
+    tmpfile=${XDG_RUNTIME_DIR}/bw_session
 
     if [ -f "${tmpfile}" ]; then
         cat "${tmpfile}"
