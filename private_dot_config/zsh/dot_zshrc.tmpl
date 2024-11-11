@@ -65,39 +65,7 @@ done
     alias rcat="command cat"
 
 {{ if .integration.bitwarden.enabled -}}
-bw_session () {
-    if (( ${+BW_SESSION} )); then
-        bw unlock --check  &> /dev/null
-        if [ $? -ne 0 ]; then
-            bw unlock --raw
-        else
-            echo $BW_SESSION
-        fi
-        exit $?
-    fi
-
-    if [ -z $XDG_RUNTIME_DIR ]; then
-        bw unlock --raw
-        exit $?
-    fi
-
-    tmpfile=${XDG_RUNTIME_DIR}bw_session
-
-    if [ -f "${tmpfile}" ]; then
-        cat "${tmpfile}"
-    else
-        export BW_SESSION=$(bw unlock --raw)
-        bw unlock --check &> /dev/null
-        if [ $? -eq 0 ]; then
-            echo -n "${BW_SESSION}" > "${tmpfile}"
-            cat "${tmpfile}"
-        fi
-    fi
-
-    exit $?
-
-}
-
+{{ template "bw_session.tmpl" . }}
 alias bwopen='export BW_SESSION=$(bw_session)'
 
 {{ end -}}
@@ -109,6 +77,11 @@ fi
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
     eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh.yaml)"
 fi
+
+{{ if lookPath "direnv" -}}
+eval "$(direnv hook zsh)"
+
+{{ end -}}
 
 {{ if .integration.zsh.antidote -}}
 antidote load

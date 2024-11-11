@@ -36,4 +36,7 @@ Documents/ShareX
 .ssh/
 {{- end }}
 {{- end }}
+{{ if not (lookPath "direnv") -}}
+.config/direnv
+{{- end }}
 install.sh
