@@ -75,12 +75,14 @@ bw_session () {
         fi
         exit $?
     fi
+
     if [ -z $XDG_RUNTIME_DIR ]; then
         bw unlock --raw
         exit $?
     fi
 
     tmpfile=${XDG_RUNTIME_DIR}bw_session
+
     if [ -f "${tmpfile}" ]; then
         cat "${tmpfile}"
     else
@@ -88,8 +90,8 @@ bw_session () {
         bw unlock --check &> /dev/null
         if [ $? -eq 0 ]; then
             echo -n "${BW_SESSION}" > "${tmpfile}"
+            cat "${tmpfile}"
         fi
-
     fi
 
     exit $?
