@@ -1,5 +1,5 @@
 bw_session () {
-    if [ -z XDG_RUNTIME_DIR ]; then
+    if [ -z $XDG_RUNTIME_DIR ]; then
         bw unlock --raw
     elif [ -v BW_SESSION ]; then
         bw unlock --check  &> /dev/null
@@ -8,7 +8,6 @@ bw_session () {
         else
             echo $BW_SESSION
         fi
-        echo "aa"
         exit $?
     fi
 
