@@ -59,8 +59,6 @@ done
 (( $+commands[bat] )) && \
     export BAT_THEME="Nord" && \
     export MANPAGER="sh -c 'col -bx | bat -l man -p'" && \
-    alias -g -- --help='--help 2>&1 | bat --language=help --style=plain' && \
-    alias -g -- -h='-h 2>&1 | bat --language=help --style=plain' && \
     alias cat="bat --paging=never" && \
     alias rcat="command cat"
 
@@ -89,4 +87,8 @@ antidote load
 {{ if .integration.hishtory.enabled -}}
 source ${XDG_CONFIG_HOME}/hishtory/config.zsh
 {{ end }}
+(( $+commands[bat] )) && \
+    alias -g -- --help='--help 2>&1 | bat --language=help --style=plain' && \
+    alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
+
 {{ end -}}
