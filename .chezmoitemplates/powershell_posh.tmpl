@@ -1,7 +1,13 @@
+if ([Environment]::GetCommandLineArgs().Contains('-NonInteractive')) {
+    $Global:InteractiveMode=$false
+} else {
+    $Global:InteractiveMode=$true
+}
 {{ if eq .chezmoi.os "windows" }}
 [System.Environment]::SetEnvironmentVariable('Path', $env:Path + ";{{.chezmoi.homeDir}}\.local\bin", [System.EnvironmentVariableTarget]::Process);
 
 Import-Module PSReadLine
+
 {{ end -}}
 
 if ($env:TERM_PROGRAM -eq "vscode") {
@@ -13,13 +19,15 @@ if ($env:TERM_PROGRAM -eq "vscode") {
   }
 }
 
-oh-my-posh init pwsh --config ~/.config/oh-my-posh.yaml | Invoke-Expression
+if ($InteractiveMode) {
+  oh-my-posh init pwsh --config ~/.config/oh-my-posh.yaml | Invoke-Expression
 
-Enable-PoshTransientPrompt
-Enable-PoshLineError
+  Enable-PoshTransientPrompt
+  Enable-PoshLineError
 
-if ($PSVersionTable.PSVersion.Major -ge 7) {
-  Set-PSReadLineOption -PredictionSource History
+  if ($PSVersionTable.PSVersion.Major -ge 7) {
+    Set-PSReadLineOption -PredictionSource History
+  }
 }
 
 {{ if eq .chezmoi.os "darwin" -}}
