@@ -1,4 +1,4 @@
-{{- if (and (eq .chezmoi.os "linux") (not .machine.ci)) }}
+{{- if (and (eq .chezmoi.os "linux") (not .machine.ci) (not (env "SSH_CLIENT"))) }}
 {{- if not (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
 #!/bin/bash
 
