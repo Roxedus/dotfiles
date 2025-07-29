@@ -1,0 +1,30 @@
+{{- if not .terminal.alacritty.enabled }}
+.config/alacritty
+{{- end }}
+{{- if not (lookPath "direnv") }}
+.config/direnv
+{{- end }}
+{{- if not .integration.kubernetes.enabled }}
+.config/k9s
+{{- end }}
+{{- if ne .chezmoi.os "windows" }}
+# Do not template windows on non-windows systems
+*.ps1
+.config/powershell/Microsoft.PowerShell_profile.ps1
+Documents/
+AppData/
+{{- else if eq .chezmoi.os "windows" }}
+# Do not template non-windows on windows systems
+.bash_aliases
+.bashrc
+.config/alacritty
+.config/htop
+.config/k9s
+.config/powershell
+.config/tmux
+.config/zsh
+.config/zsh-abbr
+.local/share/zsh
+.zshenv
+*.sh
+{{- end }}

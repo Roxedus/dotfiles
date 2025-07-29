@@ -1,1 +1,4 @@
 .config/oh-my-posh.json
+
+# Fully sync folders
+{{-   template "chez_fullsync.tmpl" . -}}
