@@ -1,4 +1,3 @@
-{{- if .terminal.alacritty.enabled }}
 general.import = [
     "~/.config/alacritty/theme.toml"
 ]
@@ -31,4 +30,3 @@ style = "Italic"
 [font.normal]
 family = "{{ .terminal.font }} Nerd Font"
 style = "Regular"
-{{- end }}

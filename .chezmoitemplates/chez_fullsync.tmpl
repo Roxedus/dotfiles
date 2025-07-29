@@ -7,6 +7,11 @@
 {{- if not .integration.kubernetes.enabled }}
 .config/k9s
 {{- end }}
+{{- if not .integration.zsh.antidote }}
+.config/zsh/plugins
+.config/zsh/dot_zsh_plugins.txt
+.config/zsh-abbr
+{{- end }}
 {{- if ne .chezmoi.os "windows" }}
 # Do not template windows on non-windows systems
 *.ps1

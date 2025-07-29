@@ -1,4 +1,3 @@
-{{- if .integration.kubernetes.enabled -}}
 k9s:
   liveViewAutoRefresh: false
   screenDumpDir: "{{ .chezmoi.homeDir }}/{{ .paths.XDG_STATE_HOME }}/k9s/screen-dumps"
@@ -41,4 +40,3 @@ k9s:
     memory:
       critical: 90
       warn: 70
-{{ end -}}
