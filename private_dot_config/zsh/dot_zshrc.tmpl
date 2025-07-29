@@ -80,6 +80,11 @@ eval "$(direnv hook zsh)"
 
 {{ end -}}
 
+{{ if lookPath "mise" -}}
+eval "$(mise activate zsh)"
+
+{{ end -}}
+
 {{ if .integration.zsh.antidote -}}
 antidote load
 {{ end -}}
