@@ -11,6 +11,8 @@ set -o pipefail
 {{- $hishSecret := "--offline" -}}
 {{- if .integration.bitwarden.enabled -}}
 {{- $hishSecret = (bitwardenFields "item" "dotfiles").hishtory_user_secret.value -}}
+{{- else if .integration.onepassword.enabled -}}
+{{ $hishSecret = onepasswordRead "op://personal/dotfiles/hishtory_user_secret" }}
 {{- else if not .integration.hishtory.offline -}}
 {{- $hishSecret = joinPath .chezmoi.sourceDir "/.encrypted_vars/hishtory.age" | include | decrypt -}}
 {{- end }}

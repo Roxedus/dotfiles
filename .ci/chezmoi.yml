@@ -5,6 +5,8 @@ data:
       managed: false
     oh_my_posh:
       managed: false
+    onepassword:
+      enabled: false
     hishtory:
       enabled: false
     zsh:

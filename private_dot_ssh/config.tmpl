@@ -4,6 +4,8 @@
 {{ if ne .chezmoi.hostname "code-server"  -}}
 {{- if .integration.bitwarden.enabled -}}
 {{ (bitwarden "item" "ssh_config").notes }}
+{{- else if .integration.onepassword.enabled -}}
+{{ onepasswordRead "op://Personal/ssh_config/ssh_config" }}
 {{ end -}}
 {{- if not .machine.work -}}
 Host *

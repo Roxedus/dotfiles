@@ -10,7 +10,7 @@ git:
 
 integration:
   bitwarden:
-    enabled: true
+    enabled: false
     managed: false
     version: "2023.5.0"
   eza:
@@ -32,6 +32,8 @@ integration:
     enabled: true
     managed: true
     version: latest
+  onepassword:
+    enabled: true
   podman:
     enabled: false
     managed: false
