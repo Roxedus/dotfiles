@@ -25,7 +25,6 @@ export GPG_TTY=$(tty)
 {{ end -}}
 
 export PATH="$HOME/.local/bin:$HOME/.local/wrapped:$PATH"
-export LC_tmux_session=remote
 
 {{ if .integration.kubernetes.enabled -}}
 export KREW_ROOT=${XDG_CONFIG_HOME}/krew
