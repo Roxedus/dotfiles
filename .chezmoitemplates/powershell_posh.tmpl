@@ -22,11 +22,14 @@ if ($env:TERM_PROGRAM -eq "vscode") {
 if ($InteractiveMode) {
   oh-my-posh init pwsh --config ~/.config/oh-my-posh.yaml | Invoke-Expression
 
+<# This is done in the IEX above?
   Enable-PoshTransientPrompt
   Enable-PoshLineError
+#>
 
   if ($PSVersionTable.PSVersion.Major -ge 7) {
     Set-PSReadLineOption -PredictionSource History
+    $Global:__OriginalPrompt = $function:fancyPrompt
   }
 }
 
@@ -59,4 +62,33 @@ if (Test-Path($ChocolateyProfile)) {
   Import-Module "$ChocolateyProfile"
 }
 {{ end }}
-{{- end -}}
+{{ end -}}
+
+function Global:__Terminal-Get-LastExitCode {
+  if ($? -eq $True) { return 0 }
+  $LastHistoryEntry = $(Get-History -Count 1)
+  $IsPowerShellError = $Error[0].InvocationInfo.HistoryId -eq $LastHistoryEntry.Id
+  if ($IsPowerShellError) { return -1 }
+  return $LastExitCode
+}
+
+function fancyPrompt {
+  $gle = $(__Terminal-Get-LastExitCode);
+  $LastHistoryEntry = $(Get-History -Count 1)
+  if ($Global:__LastHistoryId -ne -1) {
+    if ($LastHistoryEntry.Id -eq $Global:__LastHistoryId) {
+      $out += "`e]133;D`a"
+    } else {
+      $out += "`e]133;D;$gle`a"
+    }
+  }
+  $loc = $($executionContext.SessionState.Path.CurrentLocation);
+  $out += "`e]133;A$([char]07)";
+  $out += "`e]9;9;`"$loc`"$([char]07)";
+
+  $out += $Global:__OriginalPrompt.Invoke(); # <-- This line adds the original prompt back
+
+  $out += "`e]133;B$([char]07)";
+  $Global:__LastHistoryId = $LastHistoryEntry.Id
+  return $out
+}

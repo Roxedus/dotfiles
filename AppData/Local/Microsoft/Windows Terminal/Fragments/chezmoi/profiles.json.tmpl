@@ -11,8 +11,25 @@
             "colorScheme": "Transpy",
             "font": {
                 "face": "{{ $.terminal.font }} Nerd Font"
-            }
+            },
+            // Enable Shell integration Features
+            "showMarksOnScrollbar": true,
+            "autoMarkPrompts": true,
+            "experimental.rightClickContextMenu": true,
         },{{ end }}
+    ],
+    "actions":
+    [
+        // Scroll between prompts
+        { "keys": "ctrl+up",   "command": { "action": "scrollToMark", "direction": "previous" }, },
+        { "keys": "ctrl+down", "command": { "action": "scrollToMark", "direction": "next" }, },
+
+        // Add the ability to select a whole command (or its output)
+        { "command": { "action": "selectOutput", "direction": "prev" }, },
+        { "command": { "action": "selectOutput", "direction": "next" }, },
+
+        { "command": { "action": "selectCommand", "direction": "prev" }, },
+        { "command": { "action": "selectCommand", "direction": "next" }, },
     ],
     "schemes": [
         {
