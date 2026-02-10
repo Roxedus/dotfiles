@@ -2,9 +2,9 @@
 .encrypted_vars/
 .ci/
 .github/
+Documents/ShareX
 
 {{- if .machine.work }}
-Documents/ShareX
 {{- end }}
 {{- if eq .chezmoi.os "linux" }}
 {{- if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
