@@ -1,4 +1,4 @@
-{{- if eq .chezmoi.os "linux" -}}
+{{- if ne .chezmoi.os "windows" -}}
 #! /usr/bin/env sh
 mime=$(file -bL --mime-type "$1")
 category=${mime%%/*}

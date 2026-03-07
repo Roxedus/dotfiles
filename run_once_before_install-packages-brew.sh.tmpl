@@ -40,15 +40,17 @@ brew "terragrunt"
 tap "azure/bicep"
 {{ end -}}
 {{ if eq .chezmoi.os "darwin" -}}
-brew "fluxcd/tap/flux"
+brew "artginzburg/tap/sudo-touchid"
 brew "git"
 brew "htop"
 brew "openssh"
-brew "sudo-touchid"
 cask "font-fira-code"
-cask "git-credential-manager-core"
+cask "microsoft/git/git-credential-manager"
+{{ if .machine.iac -}}
+brew "fluxcd/tap/flux"
 cask "powershell"
 cask "vagrant"
+{{ end -}}
 {{ end -}}
 EOF
 

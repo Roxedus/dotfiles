@@ -1,6 +1,3 @@
-{{ if eq .chezmoi.os "darwin" }}
-{{- keyring "ssh_config" "work_remotes" | replaceAllRegex "\\\\n" "\n" }}
-{{ end }}
 {{ if ne .chezmoi.hostname "code-server"  -}}
 {{- if .integration.bitwarden.enabled -}}
 {{ (bitwarden "item" "ssh_config").notes }}
