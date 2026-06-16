@@ -1,7 +1,16 @@
 {{- /* chezmoi:modify-template */ -}}
+{{- if .integration.bitwarden.enabled -}}
+{{ $imgur_client := (bitwardenFields "item" "Sharex").imgur_client.value }}
+{{ $imgur_secret := (bitwardenFields "item" "Sharex").imgur_secret.value }}
+{{ $xbb_api_token := (bitwardenFields "item" "Sharex").xbb_api_token.value }}
+{{- else if .integration.onepassword.enabled -}}
+{{ $imgur_client := onepasswordRead "op://Personal/dotfiles/sharex_imgur_client" }}
+{{ $imgur_secret := onepasswordRead "op://Personal/dotfiles/sharex_imgur_secret" }}
+{{ $xbb_api_token := onepasswordRead "op://Personal/dotfiles/sharex_xbb" }}
+{{ end -}}
 {{- $ImgurInfo := dict
-  "Client_ID" (bitwardenFields "item" "Sharex").imgur_client.value
-  "Client_Secret" (bitwardenFields "item" "Sharex").imgur_secret.value
+  "Client_ID" $imgur_client
+  "Client_Secret" $imgur_secret
   "Token" nil
   "Proof" nil
 -}}
@@ -15,12 +24,12 @@
   "FileFormName" "upload"
   "URL" "{json:url}/raw"
   "ThumbnailURL" "{json:url}/raw"
-  "DeletionURL" (nospace (cat "{json:url}/delete/" (bitwardenFields "item" "Sharex").xbb_api_token.value))
+  "DeletionURL" (nospace (cat "{json:url}/delete/" $xbb_api_token))
   "ErrorMessage" nil
   "Arguments" (dict
     "file" "{filename}"
     "text" "{input}"
-    "token" (bitwardenFields "item" "Sharex").xbb_api_token.value
+    "token" $xbb_api_token
   )
 )
 -}}
